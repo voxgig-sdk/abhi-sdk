@@ -1,0 +1,28 @@
+# BasicFunFlow
+
+main: kit: flow: BasicFunFlow:
+{
+  entity: "fun",
+  kind: "basic",
+  name: "BasicFunFlow",
+  step: [
+    {
+      input: {
+        ref: "fun_ref01",
+        srcdatavar: "fun_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-fun_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFunFlow"
+}

@@ -1,0 +1,43 @@
+# Entity: fun
+
+main: kit: entity: fun: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "fact"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "fun"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/facts"
+          parts: [
+            "api"
+            "facts"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

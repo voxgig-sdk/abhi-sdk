@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "download": {
+      "DOWNLOAD00": {
+        "download_url": "s14",
+        "status": "s15"
+      },
+      "DOWNLOAD01": {
+        "download_url": "s28",
+        "status": "s29"
+      },
+      "DOWNLOAD02": {
+        "download_url": "s3c",
+        "status": "s3d"
+      }
+    }
+  },
+  "new": {
+    "download": {
+      "download_ref01": {
+        "download_url": "s50",
+        "status": "s51"
+      }
+    }
+  }
+}

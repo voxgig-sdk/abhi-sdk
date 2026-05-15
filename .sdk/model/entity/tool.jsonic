@@ -1,0 +1,100 @@
+# Entity: tool
+
+main: kit: entity: tool: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "audio_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "original_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "short_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "url"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "tool"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/shorten"
+          parts: [
+            "api"
+            "shorten"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "en"
+                kind: "query"
+                name: "lang"
+                orig: "lang"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "text"
+                orig: "text"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/tts"
+          parts: [
+            "api"
+            "tts"
+          ]
+          select: {
+            exist: [
+              "lang"
+              "text"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

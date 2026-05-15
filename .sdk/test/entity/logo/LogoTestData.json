@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "logo": {
+      "LOGO00": {
+        "logo_url": "s14",
+        "status": "s15"
+      },
+      "LOGO01": {
+        "logo_url": "s28",
+        "status": "s29"
+      },
+      "LOGO02": {
+        "logo_url": "s3c",
+        "status": "s3d"
+      }
+    }
+  },
+  "new": {
+    "logo": {
+      "logo_ref01": {
+        "logo_url": "s50",
+        "status": "s51"
+      }
+    }
+  }
+}

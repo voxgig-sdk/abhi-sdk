@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "anime": {
+      "ANIME00": {
+        "data": {},
+        "status": "s15"
+      },
+      "ANIME01": {
+        "data": {},
+        "status": "s29"
+      },
+      "ANIME02": {
+        "data": {},
+        "status": "s3d"
+      }
+    }
+  },
+  "new": {
+    "anime": {
+      "anime_ref01": {
+        "data": {},
+        "status": "s51"
+      }
+    }
+  }
+}

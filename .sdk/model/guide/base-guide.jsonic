@@ -1,0 +1,47 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 7
+  metrics: count: method: 7
+
+  entity: anime: {
+    path: "/api/anime": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: download: {
+    path: "/api/download": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: fun: {
+    path: "/api/facts": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: game: {
+    path: "/api/games": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: logo: {
+    path: "/api/logo": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: tool: {
+    path: "/api/shorten": {
+      op: create: method: *POST
+    }
+    path: "/api/tts": {
+      op: load: method: *GET
+    }
+  }
+
+}

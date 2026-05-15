@@ -1,0 +1,358 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Abhi API",
+    "description": "Abhi API offers a variety of free APIs for different purposes including anime data, downloads, fun facts, games, logo generation, and tools for tasks like shortening URLs and text-to-speech functionalities. It provides user-friendly endpoints for developers to integrate into their applications or projects.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://abhi-api.vercel.app"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://abhi-api.vercel.app",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/anime": {
+      "get": {
+        "summary": "Get anime data",
+        "description": "Retrieve anime information and data",
+        "operationId": "getAnimeData",
+        "tags": [
+          "Anime"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with anime data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/download": {
+      "get": {
+        "summary": "Download content",
+        "description": "Download various types of content",
+        "operationId": "downloadContent",
+        "tags": [
+          "Downloads"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "URL of the content to download",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with download link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "downloadUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/facts": {
+      "get": {
+        "summary": "Get fun facts",
+        "description": "Retrieve random fun facts",
+        "operationId": "getFunFacts",
+        "tags": [
+          "Fun"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with fun fact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "fact": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/games": {
+      "get": {
+        "summary": "Get games data",
+        "description": "Retrieve information about games",
+        "operationId": "getGamesData",
+        "tags": [
+          "Games"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with games data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/logo": {
+      "get": {
+        "summary": "Generate logo",
+        "description": "Generate a custom logo based on provided text",
+        "operationId": "generateLogo",
+        "tags": [
+          "Logo"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text to be used in the logo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "style",
+            "in": "query",
+            "description": "Style of the logo",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with logo",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "logoUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shorten": {
+      "post": {
+        "summary": "Shorten URL",
+        "description": "Shorten a long URL to a shorter format",
+        "operationId": "shortenUrl",
+        "tags": [
+          "Tools"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL to shorten"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response with shortened URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "originalUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "shortUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tts": {
+      "get": {
+        "summary": "Text to speech",
+        "description": "Convert text to speech audio",
+        "operationId": "textToSpeech",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text to convert to speech",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Language code for speech synthesis",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with audio file",
+            "content": {
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "audioUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Anime",
+      "description": "Endpoints related to anime data"
+    },
+    {
+      "name": "Downloads",
+      "description": "Endpoints for downloading content"
+    },
+    {
+      "name": "Fun",
+      "description": "Endpoints for fun facts and entertainment"
+    },
+    {
+      "name": "Games",
+      "description": "Endpoints related to games"
+    },
+    {
+      "name": "Logo",
+      "description": "Endpoints for logo generation"
+    },
+    {
+      "name": "Tools",
+      "description": "Utility endpoints including URL shortening and text-to-speech"
+    }
+  ]
+}

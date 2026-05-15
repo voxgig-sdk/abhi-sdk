@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "game": {
+      "GAME00": {
+        "data": [],
+        "status": "s15"
+      },
+      "GAME01": {
+        "data": [],
+        "status": "s29"
+      },
+      "GAME02": {
+        "data": [],
+        "status": "s3d"
+      }
+    }
+  },
+  "new": {
+    "game": {
+      "game_ref01": {
+        "data": [],
+        "status": "s51"
+      }
+    }
+  }
+}
