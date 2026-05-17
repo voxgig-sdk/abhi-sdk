@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/abhi-sdk"
-	"github.com/voxgig-sdk/abhi-sdk/core"
+	sdk "github.com/voxgig-sdk/abhi-sdk/go"
+	"github.com/voxgig-sdk/abhi-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/abhi-sdk/go/utility/struct"
 )
 
 func TestLogoEntity(t *testing.T) {

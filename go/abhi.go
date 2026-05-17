@@ -1,10 +1,10 @@
 package voxgigabhisdk
 
 import (
-	"github.com/voxgig-sdk/abhi-sdk/core"
-	"github.com/voxgig-sdk/abhi-sdk/entity"
-	"github.com/voxgig-sdk/abhi-sdk/feature"
-	_ "github.com/voxgig-sdk/abhi-sdk/utility"
+	"github.com/voxgig-sdk/abhi-sdk/go/core"
+	"github.com/voxgig-sdk/abhi-sdk/go/entity"
+	"github.com/voxgig-sdk/abhi-sdk/go/feature"
+	_ "github.com/voxgig-sdk/abhi-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

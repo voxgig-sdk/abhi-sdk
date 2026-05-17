@@ -3,15 +3,18 @@
     "fun": {
       "FUN00": {
         "fact": "s14",
-        "status": "s15"
+        "status": "s15",
+        "id": "FUN00"
       },
       "FUN01": {
         "fact": "s28",
-        "status": "s29"
+        "status": "s29",
+        "id": "FUN01"
       },
       "FUN02": {
         "fact": "s3c",
-        "status": "s3d"
+        "status": "s3d",
+        "id": "FUN02"
       }
     }
   },

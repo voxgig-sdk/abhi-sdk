@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/abhi-sdk"
-	"github.com/voxgig-sdk/abhi-sdk/core"
+	sdk "github.com/voxgig-sdk/abhi-sdk/go"
+	"github.com/voxgig-sdk/abhi-sdk/go/core"
 )
 
 func TestToolDirect(t *testing.T) {

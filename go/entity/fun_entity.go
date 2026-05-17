@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/abhi-sdk/core"
+	"github.com/voxgig-sdk/abhi-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/abhi-sdk/go/utility/struct"
 )
 
 type FunEntity struct {

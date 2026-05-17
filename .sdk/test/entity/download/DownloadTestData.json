@@ -3,15 +3,18 @@
     "download": {
       "DOWNLOAD00": {
         "download_url": "s14",
-        "status": "s15"
+        "status": "s15",
+        "id": "DOWNLOAD00"
       },
       "DOWNLOAD01": {
         "download_url": "s28",
-        "status": "s29"
+        "status": "s29",
+        "id": "DOWNLOAD01"
       },
       "DOWNLOAD02": {
         "download_url": "s3c",
-        "status": "s3d"
+        "status": "s3d",
+        "id": "DOWNLOAD02"
       }
     }
   },

@@ -3,15 +3,18 @@
     "logo": {
       "LOGO00": {
         "logo_url": "s14",
-        "status": "s15"
+        "status": "s15",
+        "id": "LOGO00"
       },
       "LOGO01": {
         "logo_url": "s28",
-        "status": "s29"
+        "status": "s29",
+        "id": "LOGO01"
       },
       "LOGO02": {
         "logo_url": "s3c",
-        "status": "s3d"
+        "status": "s3d",
+        "id": "LOGO02"
       }
     }
   },

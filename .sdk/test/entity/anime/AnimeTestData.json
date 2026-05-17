@@ -3,15 +3,18 @@
     "anime": {
       "ANIME00": {
         "data": {},
-        "status": "s15"
+        "status": "s15",
+        "id": "ANIME00"
       },
       "ANIME01": {
         "data": {},
-        "status": "s29"
+        "status": "s29",
+        "id": "ANIME01"
       },
       "ANIME02": {
         "data": {},
-        "status": "s3d"
+        "status": "s3d",
+        "id": "ANIME02"
       }
     }
   },
