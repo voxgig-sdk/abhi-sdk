@@ -86,7 +86,6 @@ function tool_basic_setup($extra)
         "ABHI_TEST_TOOL_ENTID" => $idmap,
         "ABHI_TEST_LIVE" => "FALSE",
         "ABHI_TEST_EXPLAIN" => "FALSE",
-        "ABHI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +97,6 @@ function tool_basic_setup($extra)
     if ($env["ABHI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["ABHI_APIKEY"],
             ],
             $extra ?? [],
         ]);

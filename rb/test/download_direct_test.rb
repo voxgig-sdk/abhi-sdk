@@ -61,14 +61,12 @@ def download_direct_setup(mockres)
   env = Runner.env_override({
     "ABHI_TEST_DOWNLOAD_ENTID" => {},
     "ABHI_TEST_LIVE" => "FALSE",
-    "ABHI_APIKEY" => "NONE",
   })
 
   live = env["ABHI_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["ABHI_APIKEY"],
     }
     client = AbhiSDK.new(merged_opts)
     return {
