@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -121,7 +121,7 @@ local anime = client:Anime(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Anime(nil):load({ id = "anime_id" }, nil)
+local result, err = client:Anime():load({ id = "anime_id" })
 ```
 
 ### Common Methods
@@ -174,7 +174,7 @@ local download = client:Download(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Download(nil):load({ id = "download_id" }, nil)
+local result, err = client:Download():load({ id = "download_id" })
 ```
 
 ### Common Methods
@@ -227,7 +227,7 @@ local fun = client:Fun(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Fun(nil):load({ id = "fun_id" }, nil)
+local result, err = client:Fun():load({ id = "fun_id" })
 ```
 
 ### Common Methods
@@ -280,7 +280,7 @@ local game = client:Game(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Game(nil):list(nil, nil)
+local results, err = client:Game():list()
 ```
 
 ### Common Methods
@@ -333,7 +333,7 @@ local logo = client:Logo(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Logo(nil):load({ id = "logo_id" }, nil)
+local result, err = client:Logo():load({ id = "logo_id" })
 ```
 
 ### Common Methods
@@ -389,9 +389,9 @@ local tool = client:Tool(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Tool(nil):create({
+local result, err = client:Tool():create({
   url = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -399,7 +399,7 @@ local result, err = client:Tool(nil):create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Tool(nil):load({ id = "tool_id" }, nil)
+local result, err = client:Tool():load({ id = "tool_id" })
 ```
 
 ### Common Methods

@@ -62,12 +62,14 @@ function download_direct_setup(mockres)
   local env = runner.env_override({
     ["ABHI_TEST_DOWNLOAD_ENTID"] = {},
     ["ABHI_TEST_LIVE"] = "FALSE",
+    ["ABHI_APIKEY"] = "NONE",
   })
 
   local live = env["ABHI_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["ABHI_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

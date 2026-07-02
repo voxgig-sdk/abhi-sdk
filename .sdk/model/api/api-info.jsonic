@@ -16,30 +16,7 @@ main: {
       ]
       title: "Abhi API"
       version: "1.0.0"
-      tagline: "Free grab-bag of anime, downloads, fun, games, logo generation, and small utilities like URL shortening and TTS"
-      homepage: "https://abhi-api.vercel.app"
-      docs_url: "https://abhi-api.vercel.app/docs"
-      about_md: `The Abhi API is a free, all-in-one collection of small public endpoints maintained by [Abhishek Suresh](https://github.com/AbhishekSuresh2). It bundles anime imagery, social-media downloaders, jokes and trivia, mini-games, text-to-logo generators, and a handful of utility tools behind a single host at \`https://abhi-api.vercel.app\`.
-
-**What you get from the API:**
-
-- Anime image and character endpoints (Itachi, Naruto, Nezuko, Miku, Waifu, and more)
-- Spotify and TikTok media downloaders
-- Fun content: facts, jokes (dark / dev / general), memes, questions, quotes, roasts
-- Mini-games: dare, math, riddle, slots, truth
-- Logo generators that render styled text (cyberMask, glitch, gold, leaves, matrix, neon, neonDream, retroWave, shadow)
-- Utilities: Bitly and TinyURL shorteners, translation, text-to-speech
-
-The project is published as a single Vercel-hosted service; the catalogue listing on [freepublicapis.com](https://freepublicapis.com/abhi-api) reports CORS as disabled. License, authentication, and rate-limit terms are not documented on the API homepage or docs page.`
-      entity_desc: {
-        anime: "Anime character and image endpoints under `/api/anime/*` (e.g. `astatus`, `couplepp`, `itori`, `itachi`, `loli`, `miku`, `naruto`, `nezuko`, `waifu`)."
-        download: "Social-media media downloaders under `/api/download/*` for Spotify (`/api/download/spotify?url=`) and TikTok (`/api/download/tiktok?url=`)."
-        fun: "Lightweight fun content under `/api/fun/*`: `facts`, `jdark`, `jdev`, `jgeneral`, `meme`, `question`, `quotes`, `roast`."
-        game: "Mini-game prompts and outcomes split across `/api/game/*` and `/api/games/*`: `dare`, `math`, `riddle`, `slots`, `truth`."
-        logo: "Styled text-to-logo image generators under `/api/logo/*` taking a `text` query parameter (`cyberMask`, `glitch`, `gold`, `leaves`, `matrix`, `neon`, `neonDream`, `retroWave`, `shadow`)."
-        tool: "Utility endpoints under `/api/tool/*`: URL shortening via `bitly` and `tinyurl`, plus `translate` and `tts` (text-to-speech)."
-      }
-      auth: false
     }
   }
 }
+

@@ -120,6 +120,7 @@ func toolBasicSetup(extra map[string]any) *entityTestSetup {
 		"ABHI_TEST_TOOL_ENTID": idmap,
 		"ABHI_TEST_LIVE":      "FALSE",
 		"ABHI_TEST_EXPLAIN":   "FALSE",
+		"ABHI_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["ABHI_TEST_TOOL_ENTID"])
@@ -130,6 +131,7 @@ func toolBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["ABHI_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["ABHI_APIKEY"],
 			},
 			extra,
 		})

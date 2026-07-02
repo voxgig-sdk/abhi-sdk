@@ -1,23 +1,8 @@
 # Abhi SDK
 
-Free grab-bag of anime, downloads, fun, games, logo generation, and small utilities like URL shortening and TTS
+Abhi API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Abhi API
-
-The Abhi API is a free, all-in-one collection of small public endpoints maintained by [Abhishek Suresh](https://github.com/AbhishekSuresh2). It bundles anime imagery, social-media downloaders, jokes and trivia, mini-games, text-to-logo generators, and a handful of utility tools behind a single host at `https://abhi-api.vercel.app`.
-
-**What you get from the API:**
-
-- Anime image and character endpoints (Itachi, Naruto, Nezuko, Miku, Waifu, and more)
-- Spotify and TikTok media downloaders
-- Fun content: facts, jokes (dark / dev / general), memes, questions, quotes, roasts
-- Mini-games: dare, math, riddle, slots, truth
-- Logo generators that render styled text (cyberMask, glitch, gold, leaves, matrix, neon, neonDream, retroWave, shadow)
-- Utilities: Bitly and TinyURL shorteners, translation, text-to-speech
-
-The project is published as a single Vercel-hosted service; the catalogue listing on [freepublicapis.com](https://freepublicapis.com/abhi-api) reports CORS as disabled. License, authentication, and rate-limit terms are not documented on the API homepage or docs page.
 
 ## Try it
 
@@ -51,27 +36,31 @@ gem install abhi-sdk
 luarocks install abhi-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { AbhiSDK } from 'abhi'
 
-const client = new AbhiSDK({})
+const client = new AbhiSDK({
+  apikey: process.env.ABHI_APIKEY,
+})
 
+// Load anime data
+const anime = await client.Anime().load({})
+console.log(anime.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,12 +90,12 @@ The API exposes 6 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Anime** | Anime character and image endpoints under `/api/anime/*` (e.g. `astatus`, `couplepp`, `itori`, `itachi`, `loli`, `miku`, `naruto`, `nezuko`, `waifu`). | `/api/anime` |
-| **Download** | Social-media media downloaders under `/api/download/*` for Spotify (`/api/download/spotify?url=`) and TikTok (`/api/download/tiktok?url=`). | `/api/download` |
-| **Fun** | Lightweight fun content under `/api/fun/*`: `facts`, `jdark`, `jdev`, `jgeneral`, `meme`, `question`, `quotes`, `roast`. | `/api/facts` |
-| **Game** | Mini-game prompts and outcomes split across `/api/game/*` and `/api/games/*`: `dare`, `math`, `riddle`, `slots`, `truth`. | `/api/games` |
-| **Logo** | Styled text-to-logo image generators under `/api/logo/*` taking a `text` query parameter (`cyberMask`, `glitch`, `gold`, `leaves`, `matrix`, `neon`, `neonDream`, `retroWave`, `shadow`). | `/api/logo` |
-| **Tool** | Utility endpoints under `/api/tool/*`: URL shortening via `bitly` and `tinyurl`, plus `translate` and `tts` (text-to-speech). | `/api/shorten` |
+| **Anime** |  | `/api/anime` |
+| **Download** |  | `/api/download` |
+| **Fun** |  | `/api/facts` |
+| **Game** |  | `/api/games` |
+| **Logo** |  | `/api/logo` |
+| **Tool** |  | `/api/shorten` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -116,15 +105,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from abhi_sdk import AbhiSDK
 
-client = AbhiSDK({})
+client = AbhiSDK({
+    "apikey": os.environ.get("ABHI_APIKEY"),
+})
 
 
 # Load a specific anime
-anime, err = client.Anime(None).load(
-    {"id": "example_id"}, None
-)
+anime, err = client.Anime().load({"id": "example_id"})
+print(anime)
 ```
 
 ### PHP
@@ -133,13 +124,14 @@ anime, err = client.Anime(None).load(
 <?php
 require_once 'abhi_sdk.php';
 
-$client = new AbhiSDK([]);
+$client = new AbhiSDK([
+    "apikey" => getenv("ABHI_APIKEY"),
+]);
 
 
 // Load a specific anime
-[$anime, $err] = $client->Anime(null)->load(
-    ["id" => "example_id"], null
-);
+[$anime, $err] = $client->Anime()->load(["id" => "example_id"]);
+print_r($anime);
 ```
 
 ### Golang
@@ -147,8 +139,13 @@ $client = new AbhiSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/abhi-sdk/go"
 
-client := sdk.NewAbhiSDK(map[string]any{})
+client := sdk.NewAbhiSDK(map[string]any{
+    "apikey": os.Getenv("ABHI_APIKEY"),
+})
 
+// Load anime data
+anime, err := client.Anime(nil).Load(map[string]any{}, nil)
+fmt.Println(anime)
 ```
 
 ### Ruby
@@ -156,13 +153,14 @@ client := sdk.NewAbhiSDK(map[string]any{})
 ```ruby
 require_relative "Abhi_sdk"
 
-client = AbhiSDK.new({})
+client = AbhiSDK.new({
+  "apikey" => ENV["ABHI_APIKEY"],
+})
 
 
 # Load a specific anime
-anime, err = client.Anime(nil).load(
-  { "id" => "example_id" }, nil
-)
+anime, err = client.Anime().load({ "id" => "example_id" })
+puts anime
 ```
 
 ### Lua
@@ -170,13 +168,14 @@ anime, err = client.Anime(nil).load(
 ```lua
 local sdk = require("abhi_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("ABHI_APIKEY"),
+})
 
 
 -- Load a specific anime
-local anime, err = client:Anime(nil):load(
-  { id = "example_id" }, nil
-)
+local anime, err = client:Anime():load({ id = "example_id" })
+print(anime)
 ```
 
 ## Unit testing in offline mode
@@ -195,25 +194,21 @@ const result = await client.Anime().load({ id: 'test01' })
 ### Python
 
 ```python
-client = AbhiSDK.test(None, None)
-result, err = client.Anime(None).load(
-    {"id": "test01"}, None
-)
+client = AbhiSDK.test()
+result, err = client.Anime().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = AbhiSDK::test(null, null);
-[$result, $err] = $client->Anime(null)->load(
-    ["id" => "test01"], null
-);
+$client = AbhiSDK::test();
+[$result, $err] = $client->Anime()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Anime(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -222,19 +217,15 @@ result, err := client.Anime(nil).Load(
 ### Ruby
 
 ```ruby
-client = AbhiSDK.test(nil, nil)
-result, err = client.Anime(nil).load(
-  { "id" => "test01" }, nil
-)
+client = AbhiSDK.test
+result, err = client.Anime().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Anime(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Anime():load({ id = "test01" })
 ```
 
 ## How it works
@@ -338,11 +329,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Abhi API
-
-- Upstream: [https://abhi-api.vercel.app](https://abhi-api.vercel.app)
-- API docs: [https://abhi-api.vercel.app/docs](https://abhi-api.vercel.app/docs)
 
 ---
 

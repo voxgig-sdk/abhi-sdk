@@ -61,12 +61,14 @@ def _game_direct_setup(mockres):
     env = runner.env_override({
         "ABHI_TEST_GAME_ENTID": {},
         "ABHI_TEST_LIVE": "FALSE",
+        "ABHI_APIKEY": "NONE",
     })
 
     live = env.get("ABHI_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("ABHI_APIKEY"),
         }
         client = AbhiSDK(merged_opts)
         return {

@@ -92,6 +92,7 @@ def _game_basic_setup(extra):
         "ABHI_TEST_GAME_ENTID": idmap,
         "ABHI_TEST_LIVE": "FALSE",
         "ABHI_TEST_EXPLAIN": "FALSE",
+        "ABHI_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ def _game_basic_setup(extra):
     if env.get("ABHI_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("ABHI_APIKEY"),
             },
             extra or {},
         ])
