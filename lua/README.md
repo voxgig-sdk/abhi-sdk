@@ -10,7 +10,7 @@ The Lua SDK for the Abhi API — an entity-oriented client using Lua conventions
 
 ## Install
 ```bash
-luarocks install abhi-sdk
+luarocks install voxgig-sdk-abhi
 ```
 
 If the module is not yet published, add the source directory to

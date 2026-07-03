@@ -10,7 +10,7 @@ The PHP SDK for the Abhi API — an entity-oriented client using PHP conventions
 
 ## Install
 ```bash
-composer require voxgig/abhi-sdk
+composer require voxgig-sdk/abhi
 ```
 
 

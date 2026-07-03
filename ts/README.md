@@ -10,7 +10,7 @@ The TypeScript SDK for the Abhi API — a type-safe, entity-oriented client with
 
 ## Install
 ```bash
-npm install abhi
+npm install @voxgig-sdk/abhi
 ```
 ## Tutorial: your first API call
 

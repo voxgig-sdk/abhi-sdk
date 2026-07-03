@@ -10,13 +10,13 @@ The Ruby SDK for the Abhi API — an entity-oriented client using idiomatic Ruby
 
 ## Install
 ```bash
-gem install abhi-sdk
+gem install voxgig-sdk-abhi
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "abhi-sdk"
+gem "voxgig-sdk-abhi"
 ```
 
 Then run:

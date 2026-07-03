@@ -10,7 +10,7 @@ The Python SDK for the Abhi API — an entity-oriented client following Pythonic
 
 ## Install
 ```bash
-pip install abhi-sdk
+pip install voxgig-sdk-abhi
 ```
 
 Or install from source:
