@@ -9,9 +9,10 @@ The PHP SDK for the Abhi API — an entity-oriented client using PHP conventions
 
 
 ## Install
-```bash
-composer require voxgig-sdk/abhi
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/abhi-sdk/releases](https://github.com/voxgig-sdk/abhi-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,17 +26,18 @@ loading a specific record.
 <?php
 require_once 'abhi_sdk.php';
 
-$client = new AbhiSDK([
-    "apikey" => getenv("ABHI_APIKEY"),
-]);
+$client = new AbhiSDK();
 ```
 
-### 3. Load a anime
+### 3. Load an anime
 
 ```php
-[$result, $err] = $client->Anime()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->anime()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -46,28 +48,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +86,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = AbhiSDK::test();
 
-[$result, $err] = $client->Abhi()->load(["id" => "test01"]);
+$result = $client->anime()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -116,7 +121,6 @@ Create a `.env.local` file at the project root:
 
 ```
 ABHI_TEST_LIVE=TRUE
-ABHI_APIKEY=<your-key>
 ```
 
 Then run:
@@ -139,7 +143,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -190,8 +193,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -280,7 +287,7 @@ API path: `/api/shorten`
 
 ### Anime
 
-Create an instance: `const anime = client.Anime()`
+Create an instance: `const anime = client.anime`
 
 #### Operations
 
@@ -298,13 +305,13 @@ Create an instance: `const anime = client.Anime()`
 #### Example: Load
 
 ```ts
-const anime = await client.Anime().load({ id: 'anime_id' })
+const anime = await client.anime.load({ id: 'anime_id' })
 ```
 
 
 ### Download
 
-Create an instance: `const download = client.Download()`
+Create an instance: `const download = client.download`
 
 #### Operations
 
@@ -322,13 +329,13 @@ Create an instance: `const download = client.Download()`
 #### Example: Load
 
 ```ts
-const download = await client.Download().load({ id: 'download_id' })
+const download = await client.download.load({ id: 'download_id' })
 ```
 
 
 ### Fun
 
-Create an instance: `const fun = client.Fun()`
+Create an instance: `const fun = client.fun`
 
 #### Operations
 
@@ -346,13 +353,13 @@ Create an instance: `const fun = client.Fun()`
 #### Example: Load
 
 ```ts
-const fun = await client.Fun().load({ id: 'fun_id' })
+const fun = await client.fun.load({ id: 'fun_id' })
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.Game()`
+Create an instance: `const game = client.game`
 
 #### Operations
 
@@ -370,13 +377,13 @@ Create an instance: `const game = client.Game()`
 #### Example: List
 
 ```ts
-const games = await client.Game().list()
+const games = await client.game.list()
 ```
 
 
 ### Logo
 
-Create an instance: `const logo = client.Logo()`
+Create an instance: `const logo = client.logo`
 
 #### Operations
 
@@ -394,13 +401,13 @@ Create an instance: `const logo = client.Logo()`
 #### Example: Load
 
 ```ts
-const logo = await client.Logo().load({ id: 'logo_id' })
+const logo = await client.logo.load({ id: 'logo_id' })
 ```
 
 
 ### Tool
 
-Create an instance: `const tool = client.Tool()`
+Create an instance: `const tool = client.tool`
 
 #### Operations
 
@@ -422,13 +429,13 @@ Create an instance: `const tool = client.Tool()`
 #### Example: Load
 
 ```ts
-const tool = await client.Tool().load({ id: 'tool_id' })
+const tool = await client.tool.load({ id: 'tool_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const tool = await client.Tool().create({
+const tool = await client.tool.create({
   url: /* `$STRING` */,
 })
 ```
@@ -505,11 +512,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$anime = $client->anime();
+$anime->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $anime->dataGet() now returns the loaded anime data
+// $anime->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -91,7 +91,6 @@ function download_basic_setup(extra)
     ["ABHI_TEST_DOWNLOAD_ENTID"] = idmap,
     ["ABHI_TEST_LIVE"] = "FALSE",
     ["ABHI_TEST_EXPLAIN"] = "FALSE",
-    ["ABHI_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ function download_basic_setup(extra)
   if env["ABHI_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["ABHI_APIKEY"],
       },
       extra or {},
     })

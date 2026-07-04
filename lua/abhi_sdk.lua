@@ -244,36 +244,114 @@ end
 
 
 
+-- Idiomatic facade: client:anime():list() / client:anime():load({ id = ... })
+function AbhiSDK:anime(data)
+  local EntityMod = require("entity.anime_entity")
+  if data == nil then
+    if self._anime == nil then
+      self._anime = EntityMod.new(self, nil)
+    end
+    return self._anime
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:anime() instead.
 function AbhiSDK:Anime(data)
   local EntityMod = require("entity.anime_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:download():list() / client:download():load({ id = ... })
+function AbhiSDK:download(data)
+  local EntityMod = require("entity.download_entity")
+  if data == nil then
+    if self._download == nil then
+      self._download = EntityMod.new(self, nil)
+    end
+    return self._download
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:download() instead.
 function AbhiSDK:Download(data)
   local EntityMod = require("entity.download_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:fun():list() / client:fun():load({ id = ... })
+function AbhiSDK:fun(data)
+  local EntityMod = require("entity.fun_entity")
+  if data == nil then
+    if self._fun == nil then
+      self._fun = EntityMod.new(self, nil)
+    end
+    return self._fun
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:fun() instead.
 function AbhiSDK:Fun(data)
   local EntityMod = require("entity.fun_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:game():list() / client:game():load({ id = ... })
+function AbhiSDK:game(data)
+  local EntityMod = require("entity.game_entity")
+  if data == nil then
+    if self._game == nil then
+      self._game = EntityMod.new(self, nil)
+    end
+    return self._game
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:game() instead.
 function AbhiSDK:Game(data)
   local EntityMod = require("entity.game_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:logo():list() / client:logo():load({ id = ... })
+function AbhiSDK:logo(data)
+  local EntityMod = require("entity.logo_entity")
+  if data == nil then
+    if self._logo == nil then
+      self._logo = EntityMod.new(self, nil)
+    end
+    return self._logo
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:logo() instead.
 function AbhiSDK:Logo(data)
   local EntityMod = require("entity.logo_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:tool():list() / client:tool():load({ id = ... })
+function AbhiSDK:tool(data)
+  local EntityMod = require("entity.tool_entity")
+  if data == nil then
+    if self._tool == nil then
+      self._tool = EntityMod.new(self, nil)
+    end
+    return self._tool
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:tool() instead.
 function AbhiSDK:Tool(data)
   local EntityMod = require("entity.tool_entity")
   return EntityMod.new(self, data)

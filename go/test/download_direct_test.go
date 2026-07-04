@@ -99,14 +99,12 @@ func downloadDirectSetup(mockres any) *downloadDirectSetupResult {
 	env := envOverride(map[string]any{
 		"ABHI_TEST_DOWNLOAD_ENTID": map[string]any{},
 		"ABHI_TEST_LIVE":    "FALSE",
-		"ABHI_APIKEY":       "NONE",
 	})
 
 	live := env["ABHI_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["ABHI_APIKEY"],
 		}
 		client := sdk.NewAbhiSDK(mergedOpts)
 

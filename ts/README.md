@@ -9,9 +9,12 @@ The TypeScript SDK for the Abhi API — a type-safe, entity-oriented client with
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/abhi
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/abhi-sdk/releases](https://github.com/voxgig-sdk/abhi-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AbhiSDK } from 'abhi'
+import { AbhiSDK } from '@voxgig-sdk/abhi'
 
-const client = new AbhiSDK({
-  apikey: process.env.ABHI_APIKEY,
-})
+const client = new AbhiSDK()
 ```
 
-### 3. Load a anime
+### 3. Load an anime
 
 ```ts
-const result = await client.Anime().load({ id: 'example_id' })
+const result = await client.anime.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AbhiSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.anime.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new AbhiSDK({ apikey: '...' })
+const client = new AbhiSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.anime
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new AbhiSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -134,7 +134,6 @@ Create a `.env.local` file at the project root:
 
 ```
 ABHI_TEST_LIVE=TRUE
-ABHI_APIKEY=<your-key>
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new AbhiSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new AbhiSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -330,7 +327,7 @@ API path: `/api/shorten`
 
 ### Anime
 
-Create an instance: `const anime = client.Anime()`
+Create an instance: `const anime = client.anime`
 
 #### Operations
 
@@ -348,13 +345,13 @@ Create an instance: `const anime = client.Anime()`
 #### Example: Load
 
 ```ts
-const anime = await client.Anime().load({ id: 'anime_id' })
+const anime = await client.anime.load({ id: 'anime_id' })
 ```
 
 
 ### Download
 
-Create an instance: `const download = client.Download()`
+Create an instance: `const download = client.download`
 
 #### Operations
 
@@ -372,13 +369,13 @@ Create an instance: `const download = client.Download()`
 #### Example: Load
 
 ```ts
-const download = await client.Download().load({ id: 'download_id' })
+const download = await client.download.load({ id: 'download_id' })
 ```
 
 
 ### Fun
 
-Create an instance: `const fun = client.Fun()`
+Create an instance: `const fun = client.fun`
 
 #### Operations
 
@@ -396,13 +393,13 @@ Create an instance: `const fun = client.Fun()`
 #### Example: Load
 
 ```ts
-const fun = await client.Fun().load({ id: 'fun_id' })
+const fun = await client.fun.load({ id: 'fun_id' })
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.Game()`
+Create an instance: `const game = client.game`
 
 #### Operations
 
@@ -420,13 +417,13 @@ Create an instance: `const game = client.Game()`
 #### Example: List
 
 ```ts
-const games = await client.Game().list()
+const games = await client.game.list()
 ```
 
 
 ### Logo
 
-Create an instance: `const logo = client.Logo()`
+Create an instance: `const logo = client.logo`
 
 #### Operations
 
@@ -444,13 +441,13 @@ Create an instance: `const logo = client.Logo()`
 #### Example: Load
 
 ```ts
-const logo = await client.Logo().load({ id: 'logo_id' })
+const logo = await client.logo.load({ id: 'logo_id' })
 ```
 
 
 ### Tool
 
-Create an instance: `const tool = client.Tool()`
+Create an instance: `const tool = client.tool`
 
 #### Operations
 
@@ -472,13 +469,13 @@ Create an instance: `const tool = client.Tool()`
 #### Example: Load
 
 ```ts
-const tool = await client.Tool().load({ id: 'tool_id' })
+const tool = await client.tool.load({ id: 'tool_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const tool = await client.Tool().create({
+const tool = await client.tool.create({
   url: /* `$STRING` */,
 })
 ```
@@ -541,7 +538,7 @@ abhi/
 Import the SDK from the package root:
 
 ```ts
-import { AbhiSDK } from 'abhi'
+import { AbhiSDK } from '@voxgig-sdk/abhi'
 ```
 
 ### Entity state
@@ -551,11 +548,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const anime = client.anime
+await anime.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// anime.data() now returns the loaded anime data
+// anime.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

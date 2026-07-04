@@ -43,8 +43,7 @@ class GameEntityTest < Minitest::Test
     game_ref01_ent = client.Game(nil)
     game_ref01_match = {}
 
-    game_ref01_list_result, err = game_ref01_ent.list(game_ref01_match, nil)
-    assert_nil err
+    game_ref01_list_result = game_ref01_ent.list(game_ref01_match, nil)
     assert game_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def game_basic_setup(extra)
     "ABHI_TEST_GAME_ENTID" => idmap,
     "ABHI_TEST_LIVE" => "FALSE",
     "ABHI_TEST_EXPLAIN" => "FALSE",
-    "ABHI_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def game_basic_setup(extra)
   if env["ABHI_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["ABHI_APIKEY"],
       },
       extra || {},
     ])

@@ -43,15 +43,13 @@ class ToolEntityTest extends TestCase
         $tool_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.tool"), "tool_ref01"));
 
-        [$tool_ref01_data_result, $err] = $tool_ref01_ent->create($tool_ref01_data, null);
-        $this->assertNull($err);
+        $tool_ref01_data_result = $tool_ref01_ent->create($tool_ref01_data, null);
         $tool_ref01_data = Helpers::to_map($tool_ref01_data_result);
         $this->assertNotNull($tool_ref01_data);
 
         // LOAD
         $tool_ref01_match_dt0 = [];
-        [$tool_ref01_data_dt0_loaded, $err] = $tool_ref01_ent->load($tool_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $tool_ref01_data_dt0_loaded = $tool_ref01_ent->load($tool_ref01_match_dt0, null);
         $this->assertNotNull($tool_ref01_data_dt0_loaded);
 
     }
@@ -86,7 +84,6 @@ function tool_basic_setup($extra)
         "ABHI_TEST_TOOL_ENTID" => $idmap,
         "ABHI_TEST_LIVE" => "FALSE",
         "ABHI_TEST_EXPLAIN" => "FALSE",
-        "ABHI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +95,6 @@ function tool_basic_setup($extra)
     if ($env["ABHI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["ABHI_APIKEY"],
             ],
             $extra ?? [],
         ]);

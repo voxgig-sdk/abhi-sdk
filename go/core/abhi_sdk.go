@@ -245,31 +245,49 @@ func (sdk *AbhiSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 }
 
 
+// Anime returns a Anime entity bound to this client.
+// Idiomatic usage: client.Anime(nil).List(nil, nil) or
+// client.Anime(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbhiSDK) Anime(data map[string]any) AbhiEntity {
 	return NewAnimeEntityFunc(sdk, data)
 }
 
 
+// Download returns a Download entity bound to this client.
+// Idiomatic usage: client.Download(nil).List(nil, nil) or
+// client.Download(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbhiSDK) Download(data map[string]any) AbhiEntity {
 	return NewDownloadEntityFunc(sdk, data)
 }
 
 
+// Fun returns a Fun entity bound to this client.
+// Idiomatic usage: client.Fun(nil).List(nil, nil) or
+// client.Fun(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbhiSDK) Fun(data map[string]any) AbhiEntity {
 	return NewFunEntityFunc(sdk, data)
 }
 
 
+// Game returns a Game entity bound to this client.
+// Idiomatic usage: client.Game(nil).List(nil, nil) or
+// client.Game(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbhiSDK) Game(data map[string]any) AbhiEntity {
 	return NewGameEntityFunc(sdk, data)
 }
 
 
+// Logo returns a Logo entity bound to this client.
+// Idiomatic usage: client.Logo(nil).List(nil, nil) or
+// client.Logo(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbhiSDK) Logo(data map[string]any) AbhiEntity {
 	return NewLogoEntityFunc(sdk, data)
 }
 
 
+// Tool returns a Tool entity bound to this client.
+// Idiomatic usage: client.Tool(nil).List(nil, nil) or
+// client.Tool(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbhiSDK) Tool(data map[string]any) AbhiEntity {
 	return NewToolEntityFunc(sdk, data)
 }

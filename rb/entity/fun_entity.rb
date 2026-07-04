@@ -45,6 +45,7 @@ class FunEntity
     end
   end
 
+  # @return [Fun, Hash] the current Fun data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class FunEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Fun fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Fun.
+  #
+  # @param reqmatch [FunLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Fun, Hash] the loaded Fun; raises AbhiError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

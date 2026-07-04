@@ -49,8 +49,7 @@ class DownloadEntityTest extends TestCase
         // LOAD
         $download_ref01_ent = $client->Download(null);
         $download_ref01_match_dt0 = [];
-        [$download_ref01_data_dt0_loaded, $err] = $download_ref01_ent->load($download_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $download_ref01_data_dt0_loaded = $download_ref01_ent->load($download_ref01_match_dt0, null);
         $this->assertNotNull($download_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function download_basic_setup($extra)
         "ABHI_TEST_DOWNLOAD_ENTID" => $idmap,
         "ABHI_TEST_LIVE" => "FALSE",
         "ABHI_TEST_EXPLAIN" => "FALSE",
-        "ABHI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function download_basic_setup($extra)
     if ($env["ABHI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["ABHI_APIKEY"],
             ],
             $extra ?? [],
         ]);

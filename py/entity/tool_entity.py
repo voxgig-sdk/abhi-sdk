@@ -1,7 +1,14 @@
 # Abhi SDK Tool entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from abhi_types import (
+    Tool,
+    ToolLoadMatch,
+    ToolCreateData,
+)
 
 
 class ToolEntity:
@@ -44,7 +51,7 @@ class ToolEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Tool:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +60,12 @@ class ToolEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Tool:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: ToolLoadMatch, ctrl=None) -> Tool:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -82,7 +89,7 @@ class ToolEntity:
     
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: ToolCreateData, ctrl=None) -> Tool:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",

@@ -44,15 +44,12 @@ class TestToolEntity:
         tool_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.tool"), "tool_ref01"))
 
-        tool_ref01_data_result, err = tool_ref01_ent.create(tool_ref01_data, None)
-        assert err is None
-        tool_ref01_data = helpers.to_map(tool_ref01_data_result)
+        tool_ref01_data = helpers.to_map(tool_ref01_ent.create(tool_ref01_data, None))
         assert tool_ref01_data is not None
 
         # LOAD
         tool_ref01_match_dt0 = {}
-        tool_ref01_data_dt0_loaded, err = tool_ref01_ent.load(tool_ref01_match_dt0, None)
-        assert err is None
+        tool_ref01_data_dt0_loaded = tool_ref01_ent.load(tool_ref01_match_dt0, None)
         assert tool_ref01_data_dt0_loaded is not None
 
 
@@ -93,7 +90,6 @@ def _tool_basic_setup(extra):
         "ABHI_TEST_TOOL_ENTID": idmap,
         "ABHI_TEST_LIVE": "FALSE",
         "ABHI_TEST_EXPLAIN": "FALSE",
-        "ABHI_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -104,7 +100,6 @@ def _tool_basic_setup(extra):
     if env.get("ABHI_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("ABHI_APIKEY"),
             },
             extra or {},
         ])

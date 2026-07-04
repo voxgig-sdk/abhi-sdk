@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -170,7 +169,7 @@ Alias for `AbhiSDK.test()`.
 ## AnimeEntity
 
 ```ts
-const anime = client.Anime()
+const anime = client.anime
 ```
 
 ### Fields
@@ -187,7 +186,7 @@ const anime = client.Anime()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Anime().load({ id: 'anime_id' })
+const result = await client.anime.load({ id: 'anime_id' })
 ```
 
 ### Common Methods
@@ -221,7 +220,7 @@ Return a copy of the entity options.
 ## DownloadEntity
 
 ```ts
-const download = client.Download()
+const download = client.download
 ```
 
 ### Fields
@@ -238,7 +237,7 @@ const download = client.Download()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Download().load({ id: 'download_id' })
+const result = await client.download.load({ id: 'download_id' })
 ```
 
 ### Common Methods
@@ -272,7 +271,7 @@ Return a copy of the entity options.
 ## FunEntity
 
 ```ts
-const fun = client.Fun()
+const fun = client.fun
 ```
 
 ### Fields
@@ -289,7 +288,7 @@ const fun = client.Fun()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Fun().load({ id: 'fun_id' })
+const result = await client.fun.load({ id: 'fun_id' })
 ```
 
 ### Common Methods
@@ -323,7 +322,7 @@ Return a copy of the entity options.
 ## GameEntity
 
 ```ts
-const game = client.Game()
+const game = client.game
 ```
 
 ### Fields
@@ -340,7 +339,7 @@ const game = client.Game()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Game().list()
+const results = await client.game.list()
 ```
 
 ### Common Methods
@@ -374,7 +373,7 @@ Return a copy of the entity options.
 ## LogoEntity
 
 ```ts
-const logo = client.Logo()
+const logo = client.logo
 ```
 
 ### Fields
@@ -391,7 +390,7 @@ const logo = client.Logo()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Logo().load({ id: 'logo_id' })
+const result = await client.logo.load({ id: 'logo_id' })
 ```
 
 ### Common Methods
@@ -425,7 +424,7 @@ Return a copy of the entity options.
 ## ToolEntity
 
 ```ts
-const tool = client.Tool()
+const tool = client.tool
 ```
 
 ### Fields
@@ -445,7 +444,7 @@ const tool = client.Tool()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Tool().create({
+const result = await client.tool.create({
   url: /* `$STRING` */,
 })
 ```
@@ -455,7 +454,7 @@ const result = await client.Tool().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Tool().load({ id: 'tool_id' })
+const result = await client.tool.load({ id: 'tool_id' })
 ```
 
 ### Common Methods

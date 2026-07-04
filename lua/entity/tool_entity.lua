@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ToolLoadMatch
+---@param ctrl? table
+---@return Tool
+---@return string? err
 function ToolEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -106,6 +110,10 @@ end
 
 
 
+---@param reqdata ToolCreateData
+---@param ctrl? table
+---@return Tool
+---@return string? err
 function ToolEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

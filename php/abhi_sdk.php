@@ -103,7 +103,7 @@ class AbhiSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class AbhiSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class AbhiSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,59 +216,125 @@ class AbhiSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Anime($data = null)
+    private $_anime = null;
+
+    // Idiomatic facade: $client->anime()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Anime() (PHP method
+    // names are case-insensitive).
+    public function anime($data = null)
     {
         require_once __DIR__ . '/entity/anime_entity.php';
+        if ($data === null) {
+            if ($this->_anime === null) {
+                $this->_anime = new AnimeEntity($this, null);
+            }
+            return $this->_anime;
+        }
         return new AnimeEntity($this, $data);
     }
 
 
-    public function Download($data = null)
+    private $_download = null;
+
+    // Idiomatic facade: $client->download()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Download() (PHP method
+    // names are case-insensitive).
+    public function download($data = null)
     {
         require_once __DIR__ . '/entity/download_entity.php';
+        if ($data === null) {
+            if ($this->_download === null) {
+                $this->_download = new DownloadEntity($this, null);
+            }
+            return $this->_download;
+        }
         return new DownloadEntity($this, $data);
     }
 
 
-    public function Fun($data = null)
+    private $_fun = null;
+
+    // Idiomatic facade: $client->fun()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Fun() (PHP method
+    // names are case-insensitive).
+    public function fun($data = null)
     {
         require_once __DIR__ . '/entity/fun_entity.php';
+        if ($data === null) {
+            if ($this->_fun === null) {
+                $this->_fun = new FunEntity($this, null);
+            }
+            return $this->_fun;
+        }
         return new FunEntity($this, $data);
     }
 
 
-    public function Game($data = null)
+    private $_game = null;
+
+    // Idiomatic facade: $client->game()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Game() (PHP method
+    // names are case-insensitive).
+    public function game($data = null)
     {
         require_once __DIR__ . '/entity/game_entity.php';
+        if ($data === null) {
+            if ($this->_game === null) {
+                $this->_game = new GameEntity($this, null);
+            }
+            return $this->_game;
+        }
         return new GameEntity($this, $data);
     }
 
 
-    public function Logo($data = null)
+    private $_logo = null;
+
+    // Idiomatic facade: $client->logo()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Logo() (PHP method
+    // names are case-insensitive).
+    public function logo($data = null)
     {
         require_once __DIR__ . '/entity/logo_entity.php';
+        if ($data === null) {
+            if ($this->_logo === null) {
+                $this->_logo = new LogoEntity($this, null);
+            }
+            return $this->_logo;
+        }
         return new LogoEntity($this, $data);
     }
 
 
-    public function Tool($data = null)
+    private $_tool = null;
+
+    // Idiomatic facade: $client->tool()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Tool() (PHP method
+    // names are case-insensitive).
+    public function tool($data = null)
     {
         require_once __DIR__ . '/entity/tool_entity.php';
+        if ($data === null) {
+            if ($this->_tool === null) {
+                $this->_tool = new ToolEntity($this, null);
+            }
+            return $this->_tool;
+        }
         return new ToolEntity($this, $data);
     }
 

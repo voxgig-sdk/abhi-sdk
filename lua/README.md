@@ -9,12 +9,9 @@ The Lua SDK for the Abhi API — an entity-oriented client using Lua conventions
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-abhi
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/abhi-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("abhi_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("ABHI_APIKEY"),
-})
+local client = sdk.new()
 ```
 
-### 3. Load a anime
+### 3. Load an anime
 
 ```lua
-local result, err = client:Anime():load({ id = "example_id" })
+local result, err = client:anime():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Abhi():load({ id = "test01" })
+local result, err = client:anime():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -121,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 ABHI_TEST_LIVE=TRUE
-ABHI_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -285,7 +278,7 @@ API path: `/api/shorten`
 
 ### Anime
 
-Create an instance: `const anime = client.Anime()`
+Create an instance: `const anime = client.anime`
 
 #### Operations
 
@@ -303,13 +296,13 @@ Create an instance: `const anime = client.Anime()`
 #### Example: Load
 
 ```ts
-const anime = await client.Anime().load({ id: 'anime_id' })
+const anime = await client.anime.load({ id: 'anime_id' })
 ```
 
 
 ### Download
 
-Create an instance: `const download = client.Download()`
+Create an instance: `const download = client.download`
 
 #### Operations
 
@@ -327,13 +320,13 @@ Create an instance: `const download = client.Download()`
 #### Example: Load
 
 ```ts
-const download = await client.Download().load({ id: 'download_id' })
+const download = await client.download.load({ id: 'download_id' })
 ```
 
 
 ### Fun
 
-Create an instance: `const fun = client.Fun()`
+Create an instance: `const fun = client.fun`
 
 #### Operations
 
@@ -351,13 +344,13 @@ Create an instance: `const fun = client.Fun()`
 #### Example: Load
 
 ```ts
-const fun = await client.Fun().load({ id: 'fun_id' })
+const fun = await client.fun.load({ id: 'fun_id' })
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.Game()`
+Create an instance: `const game = client.game`
 
 #### Operations
 
@@ -375,13 +368,13 @@ Create an instance: `const game = client.Game()`
 #### Example: List
 
 ```ts
-const games = await client.Game().list()
+const games = await client.game.list()
 ```
 
 
 ### Logo
 
-Create an instance: `const logo = client.Logo()`
+Create an instance: `const logo = client.logo`
 
 #### Operations
 
@@ -399,13 +392,13 @@ Create an instance: `const logo = client.Logo()`
 #### Example: Load
 
 ```ts
-const logo = await client.Logo().load({ id: 'logo_id' })
+const logo = await client.logo.load({ id: 'logo_id' })
 ```
 
 
 ### Tool
 
-Create an instance: `const tool = client.Tool()`
+Create an instance: `const tool = client.tool`
 
 #### Operations
 
@@ -427,13 +420,13 @@ Create an instance: `const tool = client.Tool()`
 #### Example: Load
 
 ```ts
-const tool = await client.Tool().load({ id: 'tool_id' })
+const tool = await client.tool.load({ id: 'tool_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const tool = await client.Tool().create({
+const tool = await client.tool.create({
   url: /* `$STRING` */,
 })
 ```
@@ -510,11 +503,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local anime = client:anime()
+anime:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- anime:data_get() now returns the loaded anime data
+-- anime:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

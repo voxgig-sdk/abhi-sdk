@@ -113,7 +113,6 @@ function basicSetup(extra?: any) {
     'ABHI_TEST_FUN_ENTID': idmap,
     'ABHI_TEST_LIVE': 'FALSE',
     'ABHI_TEST_EXPLAIN': 'FALSE',
-    'ABHI_APIKEY': 'NONE',
   })
 
   idmap = env['ABHI_TEST_FUN_ENTID']
@@ -123,7 +122,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new AbhiSDK(merge([
       {
-        apikey: env.ABHI_APIKEY,
       },
       extra
     ]))

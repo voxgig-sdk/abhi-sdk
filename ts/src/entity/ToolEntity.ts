@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Tool,
+  ToolLoadMatch,
+  ToolCreateData,
+} from '../AbhiTypes'
 
 // TODO: needs Entity superclass
-class ToolEntity extends AbhiEntityBase {
+class ToolEntity extends AbhiEntityBase<Tool> {
 
   constructor(client: AbhiSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class ToolEntity extends AbhiEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ToolLoadMatch, ctrl?: Control): Promise<Tool> {
 
     const utility = this._utility
 
@@ -136,7 +141,9 @@ class ToolEntity extends AbhiEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Tool> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
@@ -144,7 +151,7 @@ class ToolEntity extends AbhiEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: ToolCreateData, ctrl?: Control): Promise<Tool> {
 
     const utility = this._utility
     const {
@@ -243,7 +250,9 @@ class ToolEntity extends AbhiEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Tool> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

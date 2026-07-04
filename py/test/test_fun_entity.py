@@ -49,8 +49,7 @@ class TestFunEntity:
         # LOAD
         fun_ref01_ent = client.Fun(None)
         fun_ref01_match_dt0 = {}
-        fun_ref01_data_dt0_loaded, err = fun_ref01_ent.load(fun_ref01_match_dt0, None)
-        assert err is None
+        fun_ref01_data_dt0_loaded = fun_ref01_ent.load(fun_ref01_match_dt0, None)
         assert fun_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _fun_basic_setup(extra):
         "ABHI_TEST_FUN_ENTID": idmap,
         "ABHI_TEST_LIVE": "FALSE",
         "ABHI_TEST_EXPLAIN": "FALSE",
-        "ABHI_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _fun_basic_setup(extra):
     if env.get("ABHI_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("ABHI_APIKEY"),
             },
             extra or {},
         ])

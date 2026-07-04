@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'ABHI_TEST_LOGO_ENTID': {},
     'ABHI_TEST_LIVE': 'FALSE',
-    'ABHI_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.ABHI_TEST_LIVE
 
   if (live) {
     const client = new AbhiSDK({
-      apikey: env.ABHI_APIKEY,
     })
 
     let idmap: any = env['ABHI_TEST_LOGO_ENTID']

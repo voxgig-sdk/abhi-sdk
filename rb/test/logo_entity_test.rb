@@ -42,8 +42,7 @@ class LogoEntityTest < Minitest::Test
     # LOAD
     logo_ref01_ent = client.Logo(nil)
     logo_ref01_match_dt0 = {}
-    logo_ref01_data_dt0_loaded, err = logo_ref01_ent.load(logo_ref01_match_dt0, nil)
-    assert_nil err
+    logo_ref01_data_dt0_loaded = logo_ref01_ent.load(logo_ref01_match_dt0, nil)
     assert !logo_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def logo_basic_setup(extra)
     "ABHI_TEST_LOGO_ENTID" => idmap,
     "ABHI_TEST_LIVE" => "FALSE",
     "ABHI_TEST_EXPLAIN" => "FALSE",
-    "ABHI_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def logo_basic_setup(extra)
   if env["ABHI_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["ABHI_APIKEY"],
       },
       extra || {},
     ])

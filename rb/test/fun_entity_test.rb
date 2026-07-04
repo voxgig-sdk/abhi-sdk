@@ -42,8 +42,7 @@ class FunEntityTest < Minitest::Test
     # LOAD
     fun_ref01_ent = client.Fun(nil)
     fun_ref01_match_dt0 = {}
-    fun_ref01_data_dt0_loaded, err = fun_ref01_ent.load(fun_ref01_match_dt0, nil)
-    assert_nil err
+    fun_ref01_data_dt0_loaded = fun_ref01_ent.load(fun_ref01_match_dt0, nil)
     assert !fun_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def fun_basic_setup(extra)
     "ABHI_TEST_FUN_ENTID" => idmap,
     "ABHI_TEST_LIVE" => "FALSE",
     "ABHI_TEST_EXPLAIN" => "FALSE",
-    "ABHI_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def fun_basic_setup(extra)
   if env["ABHI_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["ABHI_APIKEY"],
       },
       extra || {},
     ])

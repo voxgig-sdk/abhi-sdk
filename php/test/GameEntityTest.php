@@ -50,8 +50,7 @@ class GameEntityTest extends TestCase
         $game_ref01_ent = $client->Game(null);
         $game_ref01_match = [];
 
-        [$game_ref01_list_result, $err] = $game_ref01_ent->list($game_ref01_match, null);
-        $this->assertNull($err);
+        $game_ref01_list_result = $game_ref01_ent->list($game_ref01_match, null);
         $this->assertIsArray($game_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function game_basic_setup($extra)
         "ABHI_TEST_GAME_ENTID" => $idmap,
         "ABHI_TEST_LIVE" => "FALSE",
         "ABHI_TEST_EXPLAIN" => "FALSE",
-        "ABHI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function game_basic_setup($extra)
     if ($env["ABHI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["ABHI_APIKEY"],
             ],
             $extra ?? [],
         ]);

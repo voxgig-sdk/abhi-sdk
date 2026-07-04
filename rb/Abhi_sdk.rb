@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Abhi_types'
+
 
 class AbhiSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class AbhiSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class AbhiSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue AbhiError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = AbhiHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class AbhiSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,46 +198,88 @@ class AbhiSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.anime.list / client.anime.load({ "id" => ... })
+  def anime
+    require_relative 'entity/anime_entity'
+    @anime ||= AnimeEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.anime instead.
   def Anime(data = nil)
     require_relative 'entity/anime_entity'
     AnimeEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.download.list / client.download.load({ "id" => ... })
+  def download
+    require_relative 'entity/download_entity'
+    @download ||= DownloadEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.download instead.
   def Download(data = nil)
     require_relative 'entity/download_entity'
     DownloadEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.fun.list / client.fun.load({ "id" => ... })
+  def fun
+    require_relative 'entity/fun_entity'
+    @fun ||= FunEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.fun instead.
   def Fun(data = nil)
     require_relative 'entity/fun_entity'
     FunEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.game.list / client.game.load({ "id" => ... })
+  def game
+    require_relative 'entity/game_entity'
+    @game ||= GameEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.game instead.
   def Game(data = nil)
     require_relative 'entity/game_entity'
     GameEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.logo.list / client.logo.load({ "id" => ... })
+  def logo
+    require_relative 'entity/logo_entity'
+    @logo ||= LogoEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.logo instead.
   def Logo(data = nil)
     require_relative 'entity/logo_entity'
     LogoEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.tool.list / client.tool.load({ "id" => ... })
+  def tool
+    require_relative 'entity/tool_entity'
+    @tool ||= ToolEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.tool instead.
   def Tool(data = nil)
     require_relative 'entity/tool_entity'
     ToolEntity.new(self, data)
