@@ -208,78 +208,42 @@ class AbhiSDK
   end
 
 
-  # Idiomatic facade: client.anime.list / client.anime.load({ "id" => ... })
-  def anime
-    require_relative 'entity/anime_entity'
-    @anime ||= AnimeEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.anime instead.
+  # Canonical facade: client.Anime.list / client.Anime.load({ "id" => ... })
   def Anime(data = nil)
     require_relative 'entity/anime_entity'
     AnimeEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.download.list / client.download.load({ "id" => ... })
-  def download
-    require_relative 'entity/download_entity'
-    @download ||= DownloadEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.download instead.
+  # Canonical facade: client.Download.list / client.Download.load({ "id" => ... })
   def Download(data = nil)
     require_relative 'entity/download_entity'
     DownloadEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.fun.list / client.fun.load({ "id" => ... })
-  def fun
-    require_relative 'entity/fun_entity'
-    @fun ||= FunEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.fun instead.
+  # Canonical facade: client.Fun.list / client.Fun.load({ "id" => ... })
   def Fun(data = nil)
     require_relative 'entity/fun_entity'
     FunEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.game.list / client.game.load({ "id" => ... })
-  def game
-    require_relative 'entity/game_entity'
-    @game ||= GameEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.game instead.
+  # Canonical facade: client.Game.list / client.Game.load({ "id" => ... })
   def Game(data = nil)
     require_relative 'entity/game_entity'
     GameEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.logo.list / client.logo.load({ "id" => ... })
-  def logo
-    require_relative 'entity/logo_entity'
-    @logo ||= LogoEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.logo instead.
+  # Canonical facade: client.Logo.list / client.Logo.load({ "id" => ... })
   def Logo(data = nil)
     require_relative 'entity/logo_entity'
     LogoEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.tool.list / client.tool.load({ "id" => ... })
-  def tool
-    require_relative 'entity/tool_entity'
-    @tool ||= ToolEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.tool instead.
+  # Canonical facade: client.Tool.list / client.Tool.load({ "id" => ... })
   def Tool(data = nil)
     require_relative 'entity/tool_entity'
     ToolEntity.new(self, data)

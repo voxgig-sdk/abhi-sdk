@@ -34,9 +34,9 @@ local client = sdk.new()
 ### 3. Load an anime
 
 ```lua
-local result, err = client:anime():load({ id = "example_id" })
+local anime, err = client:Anime():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(anime)
 ```
 
 
@@ -82,8 +82,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:anime():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Anime():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -161,7 +161,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Anime` | `(data) -> AnimeEntity` | Create a Anime entity instance. |
+| `Anime` | `(data) -> AnimeEntity` | Create an Anime entity instance. |
 | `Download` | `(data) -> DownloadEntity` | Create a Download entity instance. |
 | `Fun` | `(data) -> FunEntity` | Create a Fun entity instance. |
 | `Game` | `(data) -> GameEntity` | Create a Game entity instance. |
@@ -188,17 +188,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local anime, err = client:Anime():load({ id = "example_id" })
+    if err then error(err) end
+    -- anime is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -278,7 +283,7 @@ API path: `/api/shorten`
 
 ### Anime
 
-Create an instance: `const anime = client.anime`
+Create an instance: `local anime = client:Anime(nil)`
 
 #### Operations
 
@@ -295,14 +300,14 @@ Create an instance: `const anime = client.anime`
 
 #### Example: Load
 
-```ts
-const anime = await client.anime.load({ id: 'anime_id' })
+```lua
+local anime, err = client:Anime():load({ id = "anime_id" })
 ```
 
 
 ### Download
 
-Create an instance: `const download = client.download`
+Create an instance: `local download = client:Download(nil)`
 
 #### Operations
 
@@ -319,14 +324,14 @@ Create an instance: `const download = client.download`
 
 #### Example: Load
 
-```ts
-const download = await client.download.load({ id: 'download_id' })
+```lua
+local download, err = client:Download():load({ id = "download_id" })
 ```
 
 
 ### Fun
 
-Create an instance: `const fun = client.fun`
+Create an instance: `local fun = client:Fun(nil)`
 
 #### Operations
 
@@ -343,14 +348,14 @@ Create an instance: `const fun = client.fun`
 
 #### Example: Load
 
-```ts
-const fun = await client.fun.load({ id: 'fun_id' })
+```lua
+local fun, err = client:Fun():load({ id = "fun_id" })
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `local game = client:Game(nil)`
 
 #### Operations
 
@@ -367,14 +372,14 @@ Create an instance: `const game = client.game`
 
 #### Example: List
 
-```ts
-const games = await client.game.list()
+```lua
+local games, err = client:Game():list()
 ```
 
 
 ### Logo
 
-Create an instance: `const logo = client.logo`
+Create an instance: `local logo = client:Logo(nil)`
 
 #### Operations
 
@@ -391,14 +396,14 @@ Create an instance: `const logo = client.logo`
 
 #### Example: Load
 
-```ts
-const logo = await client.logo.load({ id: 'logo_id' })
+```lua
+local logo, err = client:Logo():load({ id = "logo_id" })
 ```
 
 
 ### Tool
 
-Create an instance: `const tool = client.tool`
+Create an instance: `local tool = client:Tool(nil)`
 
 #### Operations
 
@@ -419,15 +424,15 @@ Create an instance: `const tool = client.tool`
 
 #### Example: Load
 
-```ts
-const tool = await client.tool.load({ id: 'tool_id' })
+```lua
+local tool, err = client:Tool():load({ id = "tool_id" })
 ```
 
 #### Example: Create
 
-```ts
-const tool = await client.tool.create({
-  url: /* `$STRING` */,
+```lua
+local tool, err = client:Tool():create({
+  url = nil, -- `$STRING`
 })
 ```
 
@@ -503,7 +508,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local anime = client:anime()
+local anime = client:Anime()
 anime:load({ id = "example_id" })
 
 -- anime:data_get() now returns the loaded anime data

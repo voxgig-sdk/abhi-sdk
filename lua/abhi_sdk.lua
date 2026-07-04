@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:anime():list() / client:anime():load({ id = ... })
-function AbhiSDK:anime(data)
+-- Idiomatic facade: client:Anime():list() / client:Anime():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbhiSDK:Anime(data)
   local EntityMod = require("entity.anime_entity")
   if data == nil then
     if self._anime == nil then
@@ -256,15 +257,10 @@ function AbhiSDK:anime(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:anime() instead.
-function AbhiSDK:Anime(data)
-  local EntityMod = require("entity.anime_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:download():list() / client:download():load({ id = ... })
-function AbhiSDK:download(data)
+-- Idiomatic facade: client:Download():list() / client:Download():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbhiSDK:Download(data)
   local EntityMod = require("entity.download_entity")
   if data == nil then
     if self._download == nil then
@@ -275,15 +271,10 @@ function AbhiSDK:download(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:download() instead.
-function AbhiSDK:Download(data)
-  local EntityMod = require("entity.download_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:fun():list() / client:fun():load({ id = ... })
-function AbhiSDK:fun(data)
+-- Idiomatic facade: client:Fun():list() / client:Fun():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbhiSDK:Fun(data)
   local EntityMod = require("entity.fun_entity")
   if data == nil then
     if self._fun == nil then
@@ -294,15 +285,10 @@ function AbhiSDK:fun(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:fun() instead.
-function AbhiSDK:Fun(data)
-  local EntityMod = require("entity.fun_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:game():list() / client:game():load({ id = ... })
-function AbhiSDK:game(data)
+-- Idiomatic facade: client:Game():list() / client:Game():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbhiSDK:Game(data)
   local EntityMod = require("entity.game_entity")
   if data == nil then
     if self._game == nil then
@@ -313,15 +299,10 @@ function AbhiSDK:game(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:game() instead.
-function AbhiSDK:Game(data)
-  local EntityMod = require("entity.game_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:logo():list() / client:logo():load({ id = ... })
-function AbhiSDK:logo(data)
+-- Idiomatic facade: client:Logo():list() / client:Logo():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbhiSDK:Logo(data)
   local EntityMod = require("entity.logo_entity")
   if data == nil then
     if self._logo == nil then
@@ -332,15 +313,10 @@ function AbhiSDK:logo(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:logo() instead.
-function AbhiSDK:Logo(data)
-  local EntityMod = require("entity.logo_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:tool():list() / client:tool():load({ id = ... })
-function AbhiSDK:tool(data)
+-- Idiomatic facade: client:Tool():list() / client:Tool():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbhiSDK:Tool(data)
   local EntityMod = require("entity.tool_entity")
   if data == nil then
     if self._tool == nil then
@@ -348,12 +324,6 @@ function AbhiSDK:tool(data)
     end
     return self._tool
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:tool() instead.
-function AbhiSDK:Tool(data)
-  local EntityMod = require("entity.tool_entity")
   return EntityMod.new(self, data)
 end
 

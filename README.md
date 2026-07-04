@@ -26,9 +26,9 @@ import { AbhiSDK } from '@voxgig-sdk/abhi'
 
 const client = new AbhiSDK()
 
-// Load anime data
-const anime = await client.anime.load({})
-console.log(anime.data)
+// Load anime data (returns a Anime)
+const anime = await client.Anime().load()
+console.log(anime)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -89,8 +89,8 @@ from abhi_sdk import AbhiSDK
 client = AbhiSDK()
 
 
-# Load a specific anime
-anime = client.anime.load({"id": "example_id"})
+# Load a specific anime (returns the record, raises on error)
+anime = client.Anime().load({"id": "example_id"})
 print(anime)
 ```
 
@@ -103,8 +103,8 @@ require_once 'abhi_sdk.php';
 $client = new AbhiSDK();
 
 
-// Load a specific anime
-$anime = $client->anime()->load(["id" => "example_id"]);
+// Load a specific anime (returns the bare record; throws on error)
+$anime = $client->Anime()->load(["id" => "example_id"]);
 print_r($anime);
 ```
 
@@ -128,8 +128,8 @@ require_relative "Abhi_sdk"
 client = AbhiSDK.new
 
 
-# Load a specific anime
-anime = client.anime.load({ "id" => "example_id" })
+# Load a specific anime (returns the bare record; raises on error)
+anime = client.Anime.load({ "id" => "example_id" })
 puts anime
 ```
 
@@ -142,7 +142,7 @@ local client = sdk.new()
 
 
 -- Load a specific anime
-local anime, err = client:anime():load({ id = "example_id" })
+local anime, err = client:Anime():load({ id = "example_id" })
 print(anime)
 ```
 
@@ -155,22 +155,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = AbhiSDK.test()
-const result = await client.anime.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const anime = await client.Anime().load({ id: 'test01' })
+// anime is a bare Anime populated with mock data
+console.log(anime)
 ```
 
 ### Python
 
 ```python
 client = AbhiSDK.test()
-result = client.anime.load({"id": "test01"})
+anime = client.Anime().load({"id": "test01"})
+print(anime)
 ```
 
 ### PHP
 
 ```php
-$client = AbhiSDK::test();
-$result = $client->anime()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = AbhiSDK::test([
+    "entity" => ["anime" => ["test01" => ["id" => "test01"]]],
+]);
+$anime = $client->Anime()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -185,15 +190,18 @@ result, err := client.Anime(nil).Load(
 ### Ruby
 
 ```ruby
-client = AbhiSDK.test
-result = client.anime.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = AbhiSDK.test({
+  "entity" => { "anime" => { "test01" => { "id" => "test01" } } },
+})
+anime = client.Anime.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:anime():load({ id = "test01" })
+local result, err = client:Anime():load({ id = "test01" })
 ```
 
 ## How it works
@@ -241,6 +249,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

@@ -220,105 +220,45 @@ class AbhiSDK:
         }
 
 
-    @property
-    def anime(self):
-        """Idiomatic facade: client.anime.list() / client.anime.load({"id": ...})."""
-        from entity.anime_entity import AnimeEntity
-        cached = getattr(self, "_anime", None)
-        if cached is None:
-            cached = AnimeEntity(self, None)
-            self._anime = cached
-        return cached
-
-    def Anime(self, data=None):
-        # Deprecated: use client.anime instead.
+    def Anime(self, data=None) -> "AnimeEntity":
+        """Entity factory: client.Anime().list({}) / client.Anime().load({"id": ...})."""
         from entity.anime_entity import AnimeEntity
         return AnimeEntity(self, data)
 
 
-    @property
-    def download(self):
-        """Idiomatic facade: client.download.list() / client.download.load({"id": ...})."""
-        from entity.download_entity import DownloadEntity
-        cached = getattr(self, "_download", None)
-        if cached is None:
-            cached = DownloadEntity(self, None)
-            self._download = cached
-        return cached
-
-    def Download(self, data=None):
-        # Deprecated: use client.download instead.
+    def Download(self, data=None) -> "DownloadEntity":
+        """Entity factory: client.Download().list({}) / client.Download().load({"id": ...})."""
         from entity.download_entity import DownloadEntity
         return DownloadEntity(self, data)
 
 
-    @property
-    def fun(self):
-        """Idiomatic facade: client.fun.list() / client.fun.load({"id": ...})."""
-        from entity.fun_entity import FunEntity
-        cached = getattr(self, "_fun", None)
-        if cached is None:
-            cached = FunEntity(self, None)
-            self._fun = cached
-        return cached
-
-    def Fun(self, data=None):
-        # Deprecated: use client.fun instead.
+    def Fun(self, data=None) -> "FunEntity":
+        """Entity factory: client.Fun().list({}) / client.Fun().load({"id": ...})."""
         from entity.fun_entity import FunEntity
         return FunEntity(self, data)
 
 
-    @property
-    def game(self):
-        """Idiomatic facade: client.game.list() / client.game.load({"id": ...})."""
-        from entity.game_entity import GameEntity
-        cached = getattr(self, "_game", None)
-        if cached is None:
-            cached = GameEntity(self, None)
-            self._game = cached
-        return cached
-
-    def Game(self, data=None):
-        # Deprecated: use client.game instead.
+    def Game(self, data=None) -> "GameEntity":
+        """Entity factory: client.Game().list({}) / client.Game().load({"id": ...})."""
         from entity.game_entity import GameEntity
         return GameEntity(self, data)
 
 
-    @property
-    def logo(self):
-        """Idiomatic facade: client.logo.list() / client.logo.load({"id": ...})."""
-        from entity.logo_entity import LogoEntity
-        cached = getattr(self, "_logo", None)
-        if cached is None:
-            cached = LogoEntity(self, None)
-            self._logo = cached
-        return cached
-
-    def Logo(self, data=None):
-        # Deprecated: use client.logo instead.
+    def Logo(self, data=None) -> "LogoEntity":
+        """Entity factory: client.Logo().list({}) / client.Logo().load({"id": ...})."""
         from entity.logo_entity import LogoEntity
         return LogoEntity(self, data)
 
 
-    @property
-    def tool(self):
-        """Idiomatic facade: client.tool.list() / client.tool.load({"id": ...})."""
-        from entity.tool_entity import ToolEntity
-        cached = getattr(self, "_tool", None)
-        if cached is None:
-            cached = ToolEntity(self, None)
-            self._tool = cached
-        return cached
-
-    def Tool(self, data=None):
-        # Deprecated: use client.tool instead.
+    def Tool(self, data=None) -> "ToolEntity":
+        """Entity factory: client.Tool().list({}) / client.Tool().load({"id": ...})."""
         from entity.tool_entity import ToolEntity
         return ToolEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "AbhiSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -338,3 +278,14 @@ class AbhiSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.anime_entity import AnimeEntity
+    from entity.download_entity import DownloadEntity
+    from entity.fun_entity import FunEntity
+    from entity.game_entity import GameEntity
+    from entity.logo_entity import LogoEntity
+    from entity.tool_entity import ToolEntity

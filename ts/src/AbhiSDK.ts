@@ -209,84 +209,42 @@ class AbhiSDK {
 
 
 
-  _anime?: AnimeEntity
-
-  // Idiomatic facade: `client.anime.list()` / `client.anime.load({ id })`.
-  get anime(): AnimeEntity {
-    return (this._anime ??= new AnimeEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.anime` instead. */
+  // Entity access: `client.Anime().list()` / `client.Anime().load({ id })`.
   Anime(data?: any) {
     const self = this
     return new AnimeEntity(self,data)
   }
 
 
-  _download?: DownloadEntity
-
-  // Idiomatic facade: `client.download.list()` / `client.download.load({ id })`.
-  get download(): DownloadEntity {
-    return (this._download ??= new DownloadEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.download` instead. */
+  // Entity access: `client.Download().list()` / `client.Download().load({ id })`.
   Download(data?: any) {
     const self = this
     return new DownloadEntity(self,data)
   }
 
 
-  _fun?: FunEntity
-
-  // Idiomatic facade: `client.fun.list()` / `client.fun.load({ id })`.
-  get fun(): FunEntity {
-    return (this._fun ??= new FunEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.fun` instead. */
+  // Entity access: `client.Fun().list()` / `client.Fun().load({ id })`.
   Fun(data?: any) {
     const self = this
     return new FunEntity(self,data)
   }
 
 
-  _game?: GameEntity
-
-  // Idiomatic facade: `client.game.list()` / `client.game.load({ id })`.
-  get game(): GameEntity {
-    return (this._game ??= new GameEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.game` instead. */
+  // Entity access: `client.Game().list()` / `client.Game().load({ id })`.
   Game(data?: any) {
     const self = this
     return new GameEntity(self,data)
   }
 
 
-  _logo?: LogoEntity
-
-  // Idiomatic facade: `client.logo.list()` / `client.logo.load({ id })`.
-  get logo(): LogoEntity {
-    return (this._logo ??= new LogoEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.logo` instead. */
+  // Entity access: `client.Logo().list()` / `client.Logo().load({ id })`.
   Logo(data?: any) {
     const self = this
     return new LogoEntity(self,data)
   }
 
 
-  _tool?: ToolEntity
-
-  // Idiomatic facade: `client.tool.list()` / `client.tool.load({ id })`.
-  get tool(): ToolEntity {
-    return (this._tool ??= new ToolEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.tool` instead. */
+  // Entity access: `client.Tool().list()` / `client.Tool().load({ id })`.
   Tool(data?: any) {
     const self = this
     return new ToolEntity(self,data)

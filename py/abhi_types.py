@@ -4,96 +4,90 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Anime:
-    data: Optional[dict] = None
-    status: Optional[str] = None
+class Anime(TypedDict, total=False):
+    data: dict
+    status: str
 
 
-@dataclass
-class AnimeLoadMatch:
-    data: Optional[dict] = None
-    status: Optional[str] = None
+class AnimeLoadMatch(TypedDict, total=False):
+    data: dict
+    status: str
 
 
-@dataclass
-class Download:
-    download_url: Optional[str] = None
-    status: Optional[str] = None
+class Download(TypedDict, total=False):
+    download_url: str
+    status: str
 
 
-@dataclass
-class DownloadLoadMatch:
-    download_url: Optional[str] = None
-    status: Optional[str] = None
+class DownloadLoadMatch(TypedDict, total=False):
+    download_url: str
+    status: str
 
 
-@dataclass
-class Fun:
-    fact: Optional[str] = None
-    status: Optional[str] = None
+class Fun(TypedDict, total=False):
+    fact: str
+    status: str
 
 
-@dataclass
-class FunLoadMatch:
-    fact: Optional[str] = None
-    status: Optional[str] = None
+class FunLoadMatch(TypedDict, total=False):
+    fact: str
+    status: str
 
 
-@dataclass
-class Game:
-    data: Optional[list] = None
-    status: Optional[str] = None
+class Game(TypedDict, total=False):
+    data: list
+    status: str
 
 
-@dataclass
-class GameListMatch:
-    data: Optional[list] = None
-    status: Optional[str] = None
+class GameListMatch(TypedDict, total=False):
+    data: list
+    status: str
 
 
-@dataclass
-class Logo:
-    logo_url: Optional[str] = None
-    status: Optional[str] = None
+class Logo(TypedDict, total=False):
+    logo_url: str
+    status: str
 
 
-@dataclass
-class LogoLoadMatch:
-    logo_url: Optional[str] = None
-    status: Optional[str] = None
+class LogoLoadMatch(TypedDict, total=False):
+    logo_url: str
+    status: str
 
 
-@dataclass
-class Tool:
+class ToolRequired(TypedDict):
     url: str
-    audio_url: Optional[str] = None
-    original_url: Optional[str] = None
-    short_url: Optional[str] = None
-    status: Optional[str] = None
 
 
-@dataclass
-class ToolLoadMatch:
-    audio_url: Optional[str] = None
-    original_url: Optional[str] = None
-    short_url: Optional[str] = None
-    status: Optional[str] = None
-    url: Optional[str] = None
+class Tool(ToolRequired, total=False):
+    audio_url: str
+    original_url: str
+    short_url: str
+    status: str
 
 
-@dataclass
-class ToolCreateData:
-    audio_url: Optional[str] = None
-    original_url: Optional[str] = None
-    short_url: Optional[str] = None
-    status: Optional[str] = None
-    url: Optional[str] = None
+class ToolLoadMatch(TypedDict, total=False):
+    audio_url: str
+    original_url: str
+    short_url: str
+    status: str
+    url: str
 
+
+class ToolCreateData(TypedDict, total=False):
+    audio_url: str
+    original_url: str
+    short_url: str
+    status: str
+    url: str

@@ -233,10 +233,10 @@ class AbhiSDK
 
     private $_anime = null;
 
-    // Idiomatic facade: $client->anime()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Anime() (PHP method
-    // names are case-insensitive).
-    public function anime($data = null)
+    // Canonical facade: $client->Anime()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->anime()
+    // resolves here too.
+    public function Anime($data = null)
     {
         require_once __DIR__ . '/entity/anime_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class AbhiSDK
 
     private $_download = null;
 
-    // Idiomatic facade: $client->download()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Download() (PHP method
-    // names are case-insensitive).
-    public function download($data = null)
+    // Canonical facade: $client->Download()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->download()
+    // resolves here too.
+    public function Download($data = null)
     {
         require_once __DIR__ . '/entity/download_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class AbhiSDK
 
     private $_fun = null;
 
-    // Idiomatic facade: $client->fun()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Fun() (PHP method
-    // names are case-insensitive).
-    public function fun($data = null)
+    // Canonical facade: $client->Fun()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->fun()
+    // resolves here too.
+    public function Fun($data = null)
     {
         require_once __DIR__ . '/entity/fun_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class AbhiSDK
 
     private $_game = null;
 
-    // Idiomatic facade: $client->game()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Game() (PHP method
-    // names are case-insensitive).
-    public function game($data = null)
+    // Canonical facade: $client->Game()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->game()
+    // resolves here too.
+    public function Game($data = null)
     {
         require_once __DIR__ . '/entity/game_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class AbhiSDK
 
     private $_logo = null;
 
-    // Idiomatic facade: $client->logo()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Logo() (PHP method
-    // names are case-insensitive).
-    public function logo($data = null)
+    // Canonical facade: $client->Logo()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->logo()
+    // resolves here too.
+    public function Logo($data = null)
     {
         require_once __DIR__ . '/entity/logo_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class AbhiSDK
 
     private $_tool = null;
 
-    // Idiomatic facade: $client->tool()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Tool() (PHP method
-    // names are case-insensitive).
-    public function tool($data = null)
+    // Canonical facade: $client->Tool()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->tool()
+    // resolves here too.
+    public function Tool($data = null)
     {
         require_once __DIR__ . '/entity/tool_entity.php';
         if ($data === null) {

@@ -32,8 +32,9 @@ client = AbhiSDK.new
 
 ```ruby
 begin
-  result = client.anime.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Anime record (raises on error).
+  anime = client.Anime.load({ "id" => "example_id" })
+  puts anime
 rescue => err
   warn "load failed: #{err}"
 end
@@ -80,13 +81,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = AbhiSDK.test
+client = AbhiSDK.test({
+  "entity" => { "anime" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.anime.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+anime = client.Anime.load({ "id" => "test01" })
+puts anime
 ```
 
 ### Use a custom fetch function
@@ -162,7 +167,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Anime` | `(data) -> AnimeEntity` | Create a Anime entity instance. |
+| `Anime` | `(data) -> AnimeEntity` | Create an Anime entity instance. |
 | `Download` | `(data) -> DownloadEntity` | Create a Download entity instance. |
 | `Fun` | `(data) -> FunEntity` | Create a Fun entity instance. |
 | `Game` | `(data) -> GameEntity` | Create a Game entity instance. |
@@ -282,7 +287,7 @@ API path: `/api/shorten`
 
 ### Anime
 
-Create an instance: `const anime = client.anime`
+Create an instance: `anime = client.Anime`
 
 #### Operations
 
@@ -299,14 +304,15 @@ Create an instance: `const anime = client.anime`
 
 #### Example: Load
 
-```ts
-const anime = await client.anime.load({ id: 'anime_id' })
+```ruby
+# load returns the bare Anime record (raises on error).
+anime = client.Anime.load({ "id" => "anime_id" })
 ```
 
 
 ### Download
 
-Create an instance: `const download = client.download`
+Create an instance: `download = client.Download`
 
 #### Operations
 
@@ -323,14 +329,15 @@ Create an instance: `const download = client.download`
 
 #### Example: Load
 
-```ts
-const download = await client.download.load({ id: 'download_id' })
+```ruby
+# load returns the bare Download record (raises on error).
+download = client.Download.load({ "id" => "download_id" })
 ```
 
 
 ### Fun
 
-Create an instance: `const fun = client.fun`
+Create an instance: `fun = client.Fun`
 
 #### Operations
 
@@ -347,14 +354,15 @@ Create an instance: `const fun = client.fun`
 
 #### Example: Load
 
-```ts
-const fun = await client.fun.load({ id: 'fun_id' })
+```ruby
+# load returns the bare Fun record (raises on error).
+fun = client.Fun.load({ "id" => "fun_id" })
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `game = client.Game`
 
 #### Operations
 
@@ -371,14 +379,15 @@ Create an instance: `const game = client.game`
 
 #### Example: List
 
-```ts
-const games = await client.game.list()
+```ruby
+# list returns an Array of Game records (raises on error).
+games = client.Game.list
 ```
 
 
 ### Logo
 
-Create an instance: `const logo = client.logo`
+Create an instance: `logo = client.Logo`
 
 #### Operations
 
@@ -395,14 +404,15 @@ Create an instance: `const logo = client.logo`
 
 #### Example: Load
 
-```ts
-const logo = await client.logo.load({ id: 'logo_id' })
+```ruby
+# load returns the bare Logo record (raises on error).
+logo = client.Logo.load({ "id" => "logo_id" })
 ```
 
 
 ### Tool
 
-Create an instance: `const tool = client.tool`
+Create an instance: `tool = client.Tool`
 
 #### Operations
 
@@ -423,15 +433,16 @@ Create an instance: `const tool = client.tool`
 
 #### Example: Load
 
-```ts
-const tool = await client.tool.load({ id: 'tool_id' })
+```ruby
+# load returns the bare Tool record (raises on error).
+tool = client.Tool.load({ "id" => "tool_id" })
 ```
 
 #### Example: Create
 
-```ts
-const tool = await client.tool.create({
-  url: /* `$STRING` */,
+```ruby
+tool = client.Tool.create({
+  "url" => nil, # `$STRING`
 })
 ```
 
@@ -507,7 +518,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-anime = client.anime
+anime = client.Anime
 anime.load({ "id" => "example_id" })
 
 # anime.data_get now returns the loaded anime data

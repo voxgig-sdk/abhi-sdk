@@ -103,7 +103,7 @@ same parameters as `direct()`.
 ## AnimeEntity
 
 ```lua
-local anime = client:anime(nil)
+local anime = client:Anime(nil)
 ```
 
 ### Fields
@@ -120,7 +120,7 @@ local anime = client:anime(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:anime():load({ id = "anime_id" })
+local result, err = client:Anime():load({ id = "anime_id" })
 ```
 
 ### Common Methods
@@ -156,7 +156,7 @@ Return the entity name.
 ## DownloadEntity
 
 ```lua
-local download = client:download(nil)
+local download = client:Download(nil)
 ```
 
 ### Fields
@@ -173,7 +173,7 @@ local download = client:download(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:download():load({ id = "download_id" })
+local result, err = client:Download():load({ id = "download_id" })
 ```
 
 ### Common Methods
@@ -209,7 +209,7 @@ Return the entity name.
 ## FunEntity
 
 ```lua
-local fun = client:fun(nil)
+local fun = client:Fun(nil)
 ```
 
 ### Fields
@@ -226,7 +226,7 @@ local fun = client:fun(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:fun():load({ id = "fun_id" })
+local result, err = client:Fun():load({ id = "fun_id" })
 ```
 
 ### Common Methods
@@ -262,7 +262,7 @@ Return the entity name.
 ## GameEntity
 
 ```lua
-local game = client:game(nil)
+local game = client:Game(nil)
 ```
 
 ### Fields
@@ -279,7 +279,7 @@ local game = client:game(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:game():list()
+local results, err = client:Game():list()
 ```
 
 ### Common Methods
@@ -315,7 +315,7 @@ Return the entity name.
 ## LogoEntity
 
 ```lua
-local logo = client:logo(nil)
+local logo = client:Logo(nil)
 ```
 
 ### Fields
@@ -332,7 +332,7 @@ local logo = client:logo(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:logo():load({ id = "logo_id" })
+local result, err = client:Logo():load({ id = "logo_id" })
 ```
 
 ### Common Methods
@@ -368,7 +368,7 @@ Return the entity name.
 ## ToolEntity
 
 ```lua
-local tool = client:tool(nil)
+local tool = client:Tool(nil)
 ```
 
 ### Fields
@@ -388,7 +388,7 @@ local tool = client:tool(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:tool():create({
+local result, err = client:Tool():create({
   url = --[[ `$STRING` ]],
 })
 ```
@@ -398,7 +398,7 @@ local result, err = client:tool():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:tool():load({ id = "tool_id" })
+local result, err = client:Tool():load({ id = "tool_id" })
 ```
 
 ### Common Methods

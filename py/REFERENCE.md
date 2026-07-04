@@ -100,7 +100,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AnimeEntity
 
 ```python
-anime = client.anime
+anime = client.Anime()
 ```
 
 ### Fields
@@ -117,7 +117,7 @@ anime = client.anime
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.anime.load({"id": "anime_id"})
+result = client.Anime().load({"id": "anime_id"})
 ```
 
 ### Common Methods
@@ -152,7 +152,7 @@ Return the entity name.
 ## DownloadEntity
 
 ```python
-download = client.download
+download = client.Download()
 ```
 
 ### Fields
@@ -169,7 +169,7 @@ download = client.download
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.download.load({"id": "download_id"})
+result = client.Download().load({"id": "download_id"})
 ```
 
 ### Common Methods
@@ -204,7 +204,7 @@ Return the entity name.
 ## FunEntity
 
 ```python
-fun = client.fun
+fun = client.Fun()
 ```
 
 ### Fields
@@ -221,7 +221,7 @@ fun = client.fun
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.fun.load({"id": "fun_id"})
+result = client.Fun().load({"id": "fun_id"})
 ```
 
 ### Common Methods
@@ -256,7 +256,7 @@ Return the entity name.
 ## GameEntity
 
 ```python
-game = client.game
+game = client.Game()
 ```
 
 ### Fields
@@ -273,7 +273,9 @@ game = client.game
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.game.list({})
+results = client.Game().list({})
+for game in results:
+    print(game)
 ```
 
 ### Common Methods
@@ -308,7 +310,7 @@ Return the entity name.
 ## LogoEntity
 
 ```python
-logo = client.logo
+logo = client.Logo()
 ```
 
 ### Fields
@@ -325,7 +327,7 @@ logo = client.logo
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.logo.load({"id": "logo_id"})
+result = client.Logo().load({"id": "logo_id"})
 ```
 
 ### Common Methods
@@ -360,7 +362,7 @@ Return the entity name.
 ## ToolEntity
 
 ```python
-tool = client.tool
+tool = client.Tool()
 ```
 
 ### Fields
@@ -380,8 +382,8 @@ tool = client.tool
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.tool.create({
-    "url": # `$STRING`,
+result = client.Tool().create({
+    "url": ...,  # `$STRING`
 })
 ```
 
@@ -390,7 +392,7 @@ result = client.tool.create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.tool.load({"id": "tool_id"})
+result = client.Tool().load({"id": "tool_id"})
 ```
 
 ### Common Methods

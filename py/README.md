@@ -33,10 +33,12 @@ client = AbhiSDK()
 
 ### 3. Load an anime
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.anime.load({"id": "example_id"})
-    print(result)
+    anime = client.Anime().load({"id": "example_id"})
+    print(anime)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -84,8 +86,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AbhiSDK.test()
 
-result = client.anime.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+anime = client.Anime().load({"id": "test01"})
+# anime contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -161,7 +164,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Anime` | `(data) -> AnimeEntity` | Create a Anime entity instance. |
+| `Anime` | `(data) -> AnimeEntity` | Create an Anime entity instance. |
 | `Download` | `(data) -> DownloadEntity` | Create a Download entity instance. |
 | `Fun` | `(data) -> FunEntity` | Create a Fun entity instance. |
 | `Game` | `(data) -> GameEntity` | Create a Game entity instance. |
@@ -282,7 +285,7 @@ API path: `/api/shorten`
 
 ### Anime
 
-Create an instance: `const anime = client.anime`
+Create an instance: `anime = client.Anime()`
 
 #### Operations
 
@@ -299,14 +302,14 @@ Create an instance: `const anime = client.anime`
 
 #### Example: Load
 
-```ts
-const anime = await client.anime.load({ id: 'anime_id' })
+```python
+anime = client.Anime().load({"id": "anime_id"})
 ```
 
 
 ### Download
 
-Create an instance: `const download = client.download`
+Create an instance: `download = client.Download()`
 
 #### Operations
 
@@ -323,14 +326,14 @@ Create an instance: `const download = client.download`
 
 #### Example: Load
 
-```ts
-const download = await client.download.load({ id: 'download_id' })
+```python
+download = client.Download().load({"id": "download_id"})
 ```
 
 
 ### Fun
 
-Create an instance: `const fun = client.fun`
+Create an instance: `fun = client.Fun()`
 
 #### Operations
 
@@ -347,14 +350,14 @@ Create an instance: `const fun = client.fun`
 
 #### Example: Load
 
-```ts
-const fun = await client.fun.load({ id: 'fun_id' })
+```python
+fun = client.Fun().load({"id": "fun_id"})
 ```
 
 
 ### Game
 
-Create an instance: `const game = client.game`
+Create an instance: `game = client.Game()`
 
 #### Operations
 
@@ -371,14 +374,14 @@ Create an instance: `const game = client.game`
 
 #### Example: List
 
-```ts
-const games = await client.game.list()
+```python
+games = client.Game().list({})
 ```
 
 
 ### Logo
 
-Create an instance: `const logo = client.logo`
+Create an instance: `logo = client.Logo()`
 
 #### Operations
 
@@ -395,14 +398,14 @@ Create an instance: `const logo = client.logo`
 
 #### Example: Load
 
-```ts
-const logo = await client.logo.load({ id: 'logo_id' })
+```python
+logo = client.Logo().load({"id": "logo_id"})
 ```
 
 
 ### Tool
 
-Create an instance: `const tool = client.tool`
+Create an instance: `tool = client.Tool()`
 
 #### Operations
 
@@ -423,15 +426,15 @@ Create an instance: `const tool = client.tool`
 
 #### Example: Load
 
-```ts
-const tool = await client.tool.load({ id: 'tool_id' })
+```python
+tool = client.Tool().load({"id": "tool_id"})
 ```
 
 #### Example: Create
 
-```ts
-const tool = await client.tool.create({
-  url: /* `$STRING` */,
+```python
+tool = client.Tool().create({
+    "url": ...,  # `$STRING`
 })
 ```
 
@@ -506,7 +509,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-anime = client.anime
+anime = client.Anime()
 anime.load({"id": "example_id"})
 
 # anime.data_get() now returns the loaded anime data
