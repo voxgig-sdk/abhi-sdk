@@ -21,7 +21,7 @@ Anime = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Anime#load (any subset of Anime fields).
+# Request payload for Anime#load.
 #
 # @!attribute [rw] data
 #   @return [Hash, nil]
@@ -47,7 +47,7 @@ Download = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Download#load (any subset of Download fields).
+# Request payload for Download#load.
 #
 # @!attribute [rw] download_url
 #   @return [String, nil]
@@ -73,7 +73,7 @@ Fun = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Fun#load (any subset of Fun fields).
+# Request payload for Fun#load.
 #
 # @!attribute [rw] fact
 #   @return [String, nil]
@@ -99,7 +99,7 @@ Game = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Game#list (any subset of Game fields).
+# Request payload for Game#list.
 #
 # @!attribute [rw] data
 #   @return [Array, nil]
@@ -125,7 +125,7 @@ Logo = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Logo#load (any subset of Logo fields).
+# Request payload for Logo#load.
 #
 # @!attribute [rw] logo_url
 #   @return [String, nil]
@@ -163,7 +163,7 @@ Tool = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Tool#load (any subset of Tool fields).
+# Request payload for Tool#load.
 #
 # @!attribute [rw] audio_url
 #   @return [String, nil]
@@ -188,7 +188,7 @@ ToolLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Tool#create (any subset of Tool fields).
+# Request payload for Tool#create.
 #
 # @!attribute [rw] audio_url
 #   @return [String, nil]
@@ -203,7 +203,7 @@ ToolLoadMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] url
-#   @return [String, nil]
+#   @return [String]
 ToolCreateData = Struct.new(
   :audio_url,
   :original_url,

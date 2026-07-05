@@ -110,8 +110,8 @@ local anime = client:Anime(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$OBJECT`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `table` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -120,7 +120,7 @@ local anime = client:Anime(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Anime():load({ id = "anime_id" })
+local result, err = client:Anime():load()
 ```
 
 ### Common Methods
@@ -163,8 +163,8 @@ local download = client:Download(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `download_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `download_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -173,7 +173,7 @@ local download = client:Download(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Download():load({ id = "download_id" })
+local result, err = client:Download():load()
 ```
 
 ### Common Methods
@@ -216,8 +216,8 @@ local fun = client:Fun(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fact` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `fact` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -226,7 +226,7 @@ local fun = client:Fun(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Fun():load({ id = "fun_id" })
+local result, err = client:Fun():load()
 ```
 
 ### Common Methods
@@ -269,8 +269,8 @@ local game = client:Game(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$ARRAY`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `table` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -322,8 +322,8 @@ local logo = client:Logo(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `logo_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `logo_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -332,7 +332,7 @@ local logo = client:Logo(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Logo():load({ id = "logo_id" })
+local result, err = client:Logo():load()
 ```
 
 ### Common Methods
@@ -375,11 +375,11 @@ local tool = client:Tool(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `audio_url` | ``$STRING`` | No |  |
-| `original_url` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | Yes |  |
+| `audio_url` | `string` | No |  |
+| `original_url` | `string` | No |  |
+| `short_url` | `string` | No |  |
+| `status` | `string` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Operations
 
@@ -389,7 +389,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Tool():create({
-  url = --[[ `$STRING` ]],
+  url = --[[ string ]],
 })
 ```
 
@@ -398,7 +398,7 @@ local result, err = client:Tool():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Tool():load({ id = "tool_id" })
+local result, err = client:Tool():load()
 ```
 
 ### Common Methods

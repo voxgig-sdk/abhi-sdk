@@ -176,8 +176,8 @@ const anime = client.Anime()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$OBJECT`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `Record<string, any>` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -186,7 +186,7 @@ const anime = client.Anime()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Anime().load({ id: 'anime_id' })
+const result = await client.Anime().load()
 ```
 
 ### Common Methods
@@ -227,8 +227,8 @@ const download = client.Download()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `download_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `download_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -237,7 +237,7 @@ const download = client.Download()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Download().load({ id: 'download_id' })
+const result = await client.Download().load()
 ```
 
 ### Common Methods
@@ -278,8 +278,8 @@ const fun = client.Fun()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fact` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `fact` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -288,7 +288,7 @@ const fun = client.Fun()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Fun().load({ id: 'fun_id' })
+const result = await client.Fun().load()
 ```
 
 ### Common Methods
@@ -329,8 +329,8 @@ const game = client.Game()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$ARRAY`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `any[]` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -380,8 +380,8 @@ const logo = client.Logo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `logo_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `logo_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -390,7 +390,7 @@ const logo = client.Logo()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Logo().load({ id: 'logo_id' })
+const result = await client.Logo().load()
 ```
 
 ### Common Methods
@@ -431,11 +431,11 @@ const tool = client.Tool()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `audio_url` | ``$STRING`` | No |  |
-| `original_url` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | Yes |  |
+| `audio_url` | `string` | No |  |
+| `original_url` | `string` | No |  |
+| `short_url` | `string` | No |  |
+| `status` | `string` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Operations
 
@@ -445,7 +445,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Tool().create({
-  url: /* `$STRING` */,
+  url: /* string */,
 })
 ```
 
@@ -454,7 +454,7 @@ const result = await client.Tool().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Tool().load({ id: 'tool_id' })
+const result = await client.Tool().load()
 ```
 
 ### Common Methods

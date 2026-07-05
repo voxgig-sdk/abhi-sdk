@@ -107,8 +107,8 @@ anime = client.Anime()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$OBJECT`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `dict` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -117,7 +117,7 @@ anime = client.Anime()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Anime().load({"id": "anime_id"})
+result = client.Anime().load()
 ```
 
 ### Common Methods
@@ -159,8 +159,8 @@ download = client.Download()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `download_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `download_url` | `str` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -169,7 +169,7 @@ download = client.Download()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Download().load({"id": "download_id"})
+result = client.Download().load()
 ```
 
 ### Common Methods
@@ -211,8 +211,8 @@ fun = client.Fun()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fact` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `fact` | `str` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -221,7 +221,7 @@ fun = client.Fun()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Fun().load({"id": "fun_id"})
+result = client.Fun().load()
 ```
 
 ### Common Methods
@@ -263,17 +263,17 @@ game = client.Game()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$ARRAY`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `list` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Game().list({})
+results = client.Game().list()
 for game in results:
     print(game)
 ```
@@ -317,8 +317,8 @@ logo = client.Logo()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `logo_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `logo_url` | `str` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -327,7 +327,7 @@ logo = client.Logo()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Logo().load({"id": "logo_id"})
+result = client.Logo().load()
 ```
 
 ### Common Methods
@@ -369,11 +369,11 @@ tool = client.Tool()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `audio_url` | ``$STRING`` | No |  |
-| `original_url` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | Yes |  |
+| `audio_url` | `str` | No |  |
+| `original_url` | `str` | No |  |
+| `short_url` | `str` | No |  |
+| `status` | `str` | No |  |
+| `url` | `str` | Yes |  |
 
 ### Operations
 
@@ -383,7 +383,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Tool().create({
-    "url": ...,  # `$STRING`
+    "url": "example",  # str
 })
 ```
 
@@ -392,7 +392,7 @@ result = client.Tool().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Tool().load({"id": "tool_id"})
+result = client.Tool().load()
 ```
 
 ### Common Methods

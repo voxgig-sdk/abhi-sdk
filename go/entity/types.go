@@ -14,8 +14,7 @@ type Anime struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// AnimeLoadMatch mirrors the anime fields as an all-optional match
-// filter (Go analog of Partial<Anime>).
+// AnimeLoadMatch is the typed request payload for Anime.LoadTyped.
 type AnimeLoadMatch struct {
 	Data *map[string]any `json:"data,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -27,8 +26,7 @@ type Download struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// DownloadLoadMatch mirrors the download fields as an all-optional match
-// filter (Go analog of Partial<Download>).
+// DownloadLoadMatch is the typed request payload for Download.LoadTyped.
 type DownloadLoadMatch struct {
 	DownloadUrl *string `json:"download_url,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -40,8 +38,7 @@ type Fun struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// FunLoadMatch mirrors the fun fields as an all-optional match
-// filter (Go analog of Partial<Fun>).
+// FunLoadMatch is the typed request payload for Fun.LoadTyped.
 type FunLoadMatch struct {
 	Fact *string `json:"fact,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -53,8 +50,7 @@ type Game struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// GameListMatch mirrors the game fields as an all-optional match
-// filter (Go analog of Partial<Game>).
+// GameListMatch is the typed request payload for Game.ListTyped.
 type GameListMatch struct {
 	Data *[]any `json:"data,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -66,8 +62,7 @@ type Logo struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// LogoLoadMatch mirrors the logo fields as an all-optional match
-// filter (Go analog of Partial<Logo>).
+// LogoLoadMatch is the typed request payload for Logo.LoadTyped.
 type LogoLoadMatch struct {
 	LogoUrl *string `json:"logo_url,omitempty"`
 	Status *string `json:"status,omitempty"`
@@ -82,8 +77,7 @@ type Tool struct {
 	Url string `json:"url"`
 }
 
-// ToolLoadMatch mirrors the tool fields as an all-optional match
-// filter (Go analog of Partial<Tool>).
+// ToolLoadMatch is the typed request payload for Tool.LoadTyped.
 type ToolLoadMatch struct {
 	AudioUrl *string `json:"audio_url,omitempty"`
 	OriginalUrl *string `json:"original_url,omitempty"`
@@ -92,14 +86,13 @@ type ToolLoadMatch struct {
 	Url *string `json:"url,omitempty"`
 }
 
-// ToolCreateData mirrors the tool fields as an all-optional match
-// filter (Go analog of Partial<Tool>).
+// ToolCreateData is the typed request payload for Tool.CreateTyped.
 type ToolCreateData struct {
 	AudioUrl *string `json:"audio_url,omitempty"`
 	OriginalUrl *string `json:"original_url,omitempty"`
 	ShortUrl *string `json:"short_url,omitempty"`
 	Status *string `json:"status,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Url string `json:"url"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

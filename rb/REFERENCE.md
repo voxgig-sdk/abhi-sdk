@@ -8,7 +8,7 @@ Complete API reference for the Abhi Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'abhi_sdk'
+require_relative 'Abhi_sdk'
 
 client = AbhiSDK.new(options)
 ```
@@ -113,8 +113,8 @@ anime = client.Anime
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$OBJECT`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `Hash` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -123,7 +123,7 @@ anime = client.Anime
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Anime.load({ "id" => "anime_id" })
+result = client.Anime.load()
 ```
 
 ### Common Methods
@@ -166,8 +166,8 @@ download = client.Download
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `download_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `download_url` | `String` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -176,7 +176,7 @@ download = client.Download
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Download.load({ "id" => "download_id" })
+result = client.Download.load()
 ```
 
 ### Common Methods
@@ -219,8 +219,8 @@ fun = client.Fun
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fact` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `fact` | `String` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -229,7 +229,7 @@ fun = client.Fun
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Fun.load({ "id" => "fun_id" })
+result = client.Fun.load()
 ```
 
 ### Common Methods
@@ -272,17 +272,17 @@ game = client.Game
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$ARRAY`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `Array` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Game.list(nil)
+results = client.Game.list
 ```
 
 ### Common Methods
@@ -325,8 +325,8 @@ logo = client.Logo
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `logo_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `logo_url` | `String` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -335,7 +335,7 @@ logo = client.Logo
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Logo.load({ "id" => "logo_id" })
+result = client.Logo.load()
 ```
 
 ### Common Methods
@@ -378,11 +378,11 @@ tool = client.Tool
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `audio_url` | ``$STRING`` | No |  |
-| `original_url` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | Yes |  |
+| `audio_url` | `String` | No |  |
+| `original_url` | `String` | No |  |
+| `short_url` | `String` | No |  |
+| `status` | `String` | No |  |
+| `url` | `String` | Yes |  |
 
 ### Operations
 
@@ -392,7 +392,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Tool.create({
-  "url" => # `$STRING`,
+  "url" => "example", # String
 })
 ```
 
@@ -401,7 +401,7 @@ result = client.Tool.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Tool.load({ "id" => "tool_id" })
+result = client.Tool.load()
 ```
 
 ### Common Methods

@@ -221,37 +221,37 @@ class AbhiSDK:
 
 
     def Anime(self, data=None) -> "AnimeEntity":
-        """Entity factory: client.Anime().list({}) / client.Anime().load({"id": ...})."""
+        """Entity factory: client.Anime().list() / client.Anime().load({"id": ...})."""
         from entity.anime_entity import AnimeEntity
         return AnimeEntity(self, data)
 
 
     def Download(self, data=None) -> "DownloadEntity":
-        """Entity factory: client.Download().list({}) / client.Download().load({"id": ...})."""
+        """Entity factory: client.Download().list() / client.Download().load({"id": ...})."""
         from entity.download_entity import DownloadEntity
         return DownloadEntity(self, data)
 
 
     def Fun(self, data=None) -> "FunEntity":
-        """Entity factory: client.Fun().list({}) / client.Fun().load({"id": ...})."""
+        """Entity factory: client.Fun().list() / client.Fun().load({"id": ...})."""
         from entity.fun_entity import FunEntity
         return FunEntity(self, data)
 
 
     def Game(self, data=None) -> "GameEntity":
-        """Entity factory: client.Game().list({}) / client.Game().load({"id": ...})."""
+        """Entity factory: client.Game().list() / client.Game().load({"id": ...})."""
         from entity.game_entity import GameEntity
         return GameEntity(self, data)
 
 
     def Logo(self, data=None) -> "LogoEntity":
-        """Entity factory: client.Logo().list({}) / client.Logo().load({"id": ...})."""
+        """Entity factory: client.Logo().list() / client.Logo().load({"id": ...})."""
         from entity.logo_entity import LogoEntity
         return LogoEntity(self, data)
 
 
     def Tool(self, data=None) -> "ToolEntity":
-        """Entity factory: client.Tool().list({}) / client.Tool().load({"id": ...})."""
+        """Entity factory: client.Tool().list() / client.Tool().load({"id": ...})."""
         from entity.tool_entity import ToolEntity
         return ToolEntity(self, data)
 

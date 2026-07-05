@@ -65,11 +65,11 @@ Create a new `LogoEntity` instance. Pass `null` for no initial data.
 
 Create a new `ToolEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): AbhiUtility`
 
 Return a copy of the SDK utility object.
 
@@ -112,8 +112,8 @@ $anime = $client->Anime();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$OBJECT`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `array` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -122,24 +122,24 @@ $anime = $client->Anime();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Anime()->load(["id" => "anime_id"]);
+$result = $client->Anime()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -148,7 +148,7 @@ Set the entity match criteria.
 Create a new `AnimeEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -165,8 +165,8 @@ $download = $client->Download();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `download_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `download_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -175,24 +175,24 @@ $download = $client->Download();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Download()->load(["id" => "download_id"]);
+$result = $client->Download()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -201,7 +201,7 @@ Set the entity match criteria.
 Create a new `DownloadEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -218,8 +218,8 @@ $fun = $client->Fun();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fact` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `fact` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -228,24 +228,24 @@ $fun = $client->Fun();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Fun()->load(["id" => "fun_id"]);
+$result = $client->Fun()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -254,7 +254,7 @@ Set the entity match criteria.
 Create a new `FunEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -271,34 +271,34 @@ $game = $client->Game();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$ARRAY`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `array` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Game()->list([]);
+$results = $client->Game()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -307,7 +307,7 @@ Set the entity match criteria.
 Create a new `GameEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -324,8 +324,8 @@ $logo = $client->Logo();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `logo_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `logo_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -334,24 +334,24 @@ $logo = $client->Logo();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Logo()->load(["id" => "logo_id"]);
+$result = $client->Logo()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -360,7 +360,7 @@ Set the entity match criteria.
 Create a new `LogoEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -377,11 +377,11 @@ $tool = $client->Tool();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `audio_url` | ``$STRING`` | No |  |
-| `original_url` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | Yes |  |
+| `audio_url` | `string` | No |  |
+| `original_url` | `string` | No |  |
+| `short_url` | `string` | No |  |
+| `status` | `string` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Operations
 
@@ -391,7 +391,7 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Tool()->create([
-  "url" => /* `$STRING` */,
+  "url" => null, // string
 ]);
 ```
 
@@ -400,24 +400,24 @@ $result = $client->Tool()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Tool()->load(["id" => "tool_id"]);
+$result = $client->Tool()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -426,7 +426,7 @@ Set the entity match criteria.
 Create a new `ToolEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

@@ -85,9 +85,12 @@ class ToolLoadMatch(TypedDict, total=False):
     url: str
 
 
-class ToolCreateData(TypedDict, total=False):
+class ToolCreateDataRequired(TypedDict):
+    url: str
+
+
+class ToolCreateData(ToolCreateDataRequired, total=False):
     audio_url: str
     original_url: str
     short_url: str
     status: str
-    url: str

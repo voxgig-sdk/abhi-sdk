@@ -4,6 +4,8 @@
 
 The PHP SDK for the Abhi API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Anime()` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -34,10 +36,41 @@ $client = new AbhiSDK();
 ```php
 try {
     // load() returns the bare Anime record (throws on error).
-    $anime = $client->Anime()->load(["id" => "example_id"]);
+    $anime = $client->Anime()->load();
     print_r($anime);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $anime = $client->Anime()->load();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -61,7 +94,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -82,16 +118,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = AbhiSDK::test([
-    "entity" => ["anime" => ["test01" => ["id" => "test01"]]],
-]);
+$client = AbhiSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$anime = $client->Anime()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$anime = $client->Anime()->load();
 print_r($anime);
 ```
 
@@ -185,10 +218,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -304,14 +335,14 @@ Create an instance: `$anime = $client->Anime();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | ``$OBJECT`` |  |
-| `status` | ``$STRING`` |  |
+| `data` | `array` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Anime record (throws on error).
-$anime = $client->Anime()->load(["id" => "anime_id"]);
+$anime = $client->Anime()->load();
 ```
 
 
@@ -329,14 +360,14 @@ Create an instance: `$download = $client->Download();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `download_url` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `download_url` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Download record (throws on error).
-$download = $client->Download()->load(["id" => "download_id"]);
+$download = $client->Download()->load();
 ```
 
 
@@ -354,14 +385,14 @@ Create an instance: `$fun = $client->Fun();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `fact` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `fact` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Fun record (throws on error).
-$fun = $client->Fun()->load(["id" => "fun_id"]);
+$fun = $client->Fun()->load();
 ```
 
 
@@ -379,8 +410,8 @@ Create an instance: `$game = $client->Game();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | ``$ARRAY`` |  |
-| `status` | ``$STRING`` |  |
+| `data` | `array` |  |
+| `status` | `string` |  |
 
 #### Example: List
 
@@ -404,14 +435,14 @@ Create an instance: `$logo = $client->Logo();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `logo_url` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `logo_url` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Logo record (throws on error).
-$logo = $client->Logo()->load(["id" => "logo_id"]);
+$logo = $client->Logo()->load();
 ```
 
 
@@ -430,34 +461,38 @@ Create an instance: `$tool = $client->Tool();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `audio_url` | ``$STRING`` |  |
-| `original_url` | ``$STRING`` |  |
-| `short_url` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `audio_url` | `string` |  |
+| `original_url` | `string` |  |
+| `short_url` | `string` |  |
+| `status` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Tool record (throws on error).
-$tool = $client->Tool()->load(["id" => "tool_id"]);
+$tool = $client->Tool()->load();
 ```
 
 #### Example: Create
 
 ```php
 $tool = $client->Tool()->create([
-    "url" => null, // `$STRING`
+    "url" => null, // string
 ]);
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -474,8 +509,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -524,10 +560,10 @@ stores the returned data and match criteria internally.
 
 ```php
 $anime = $client->Anime();
-$anime->load(["id" => "example_id"]);
+$anime->load();
 
-// $anime->dataGet() now returns the loaded anime data
-// $anime->matchGet() returns the last match criteria
+// $anime->data_get() now returns the anime data from the last load
+// $anime->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

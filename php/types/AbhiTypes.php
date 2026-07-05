@@ -19,7 +19,7 @@ class Anime
     public ?string $status = null;
 }
 
-/** Match filter for Anime#load (any subset of Anime fields). */
+/** Request payload for Anime#load. */
 class AnimeLoadMatch
 {
     public ?array $data = null;
@@ -33,7 +33,7 @@ class Download
     public ?string $status = null;
 }
 
-/** Match filter for Download#load (any subset of Download fields). */
+/** Request payload for Download#load. */
 class DownloadLoadMatch
 {
     public ?string $download_url = null;
@@ -47,7 +47,7 @@ class Fun
     public ?string $status = null;
 }
 
-/** Match filter for Fun#load (any subset of Fun fields). */
+/** Request payload for Fun#load. */
 class FunLoadMatch
 {
     public ?string $fact = null;
@@ -61,7 +61,7 @@ class Game
     public ?string $status = null;
 }
 
-/** Match filter for Game#list (any subset of Game fields). */
+/** Request payload for Game#list. */
 class GameListMatch
 {
     public ?array $data = null;
@@ -75,7 +75,7 @@ class Logo
     public ?string $status = null;
 }
 
-/** Match filter for Logo#load (any subset of Logo fields). */
+/** Request payload for Logo#load. */
 class LogoLoadMatch
 {
     public ?string $logo_url = null;
@@ -92,7 +92,7 @@ class Tool
     public string $url;
 }
 
-/** Match filter for Tool#load (any subset of Tool fields). */
+/** Request payload for Tool#load. */
 class ToolLoadMatch
 {
     public ?string $audio_url = null;
@@ -102,13 +102,13 @@ class ToolLoadMatch
     public ?string $url = null;
 }
 
-/** Match filter for Tool#create (any subset of Tool fields). */
+/** Request payload for Tool#create. */
 class ToolCreateData
 {
     public ?string $audio_url = null;
     public ?string $original_url = null;
     public ?string $short_url = null;
     public ?string $status = null;
-    public ?string $url = null;
+    public string $url;
 }
 

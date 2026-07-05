@@ -117,8 +117,8 @@ anime := client.Anime(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$OBJECT`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `map[string]any` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -127,7 +127,7 @@ anime := client.Anime(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Anime(nil).Load(map[string]any{"id": "anime_id"}, nil)
+result, err := client.Anime(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -164,8 +164,8 @@ download := client.Download(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `download_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `download_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -174,7 +174,7 @@ download := client.Download(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Download(nil).Load(map[string]any{"id": "download_id"}, nil)
+result, err := client.Download(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -211,8 +211,8 @@ fun := client.Fun(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `fact` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `fact` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -221,7 +221,7 @@ fun := client.Fun(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Fun(nil).Load(map[string]any{"id": "fun_id"}, nil)
+result, err := client.Fun(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -258,8 +258,8 @@ game := client.Game(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `data` | ``$ARRAY`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `data` | `[]any` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -305,8 +305,8 @@ logo := client.Logo(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `logo_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `logo_url` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -315,7 +315,7 @@ logo := client.Logo(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Logo(nil).Load(map[string]any{"id": "logo_id"}, nil)
+result, err := client.Logo(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -352,11 +352,11 @@ tool := client.Tool(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `audio_url` | ``$STRING`` | No |  |
-| `original_url` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | Yes |  |
+| `audio_url` | `string` | No |  |
+| `original_url` | `string` | No |  |
+| `short_url` | `string` | No |  |
+| `status` | `string` | No |  |
+| `url` | `string` | Yes |  |
 
 ### Operations
 
@@ -366,7 +366,7 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Tool(nil).Create(map[string]any{
-    "url": /* `$STRING` */,
+    "url": /* string */,
 }, nil)
 ```
 
@@ -375,7 +375,7 @@ result, err := client.Tool(nil).Create(map[string]any{
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Tool(nil).Load(map[string]any{"id": "tool_id"}, nil)
+result, err := client.Tool(nil).Load(nil, nil)
 ```
 
 ### Common Methods

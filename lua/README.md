@@ -4,6 +4,8 @@
 
 The Lua SDK for the Abhi API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Anime()` — each with the same small set of operations (`list`, `load`, `create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -34,9 +36,31 @@ local client = sdk.new()
 ### 3. Load an anime
 
 ```lua
-local anime, err = client:Anime():load({ id = "example_id" })
+local anime, err = client:Anime():load()
 if err then error(err) end
 print(anime)
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local anime, err = client:Anime():load()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -82,8 +106,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Anime():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:Anime():load()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -177,8 +201,6 @@ All entities share the same interface.
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
 | `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -193,12 +215,12 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `load` / `create` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local anime, err = client:Anime():load({ id = "example_id" })
+    local anime, err = client:Anime():load()
     if err then error(err) end
     -- anime is the loaded record
 
@@ -295,13 +317,13 @@ Create an instance: `local anime = client:Anime(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | ``$OBJECT`` |  |
-| `status` | ``$STRING`` |  |
+| `data` | `table` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local anime, err = client:Anime():load({ id = "anime_id" })
+local anime, err = client:Anime():load()
 ```
 
 
@@ -319,13 +341,13 @@ Create an instance: `local download = client:Download(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `download_url` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `download_url` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local download, err = client:Download():load({ id = "download_id" })
+local download, err = client:Download():load()
 ```
 
 
@@ -343,13 +365,13 @@ Create an instance: `local fun = client:Fun(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `fact` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `fact` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local fun, err = client:Fun():load({ id = "fun_id" })
+local fun, err = client:Fun():load()
 ```
 
 
@@ -367,8 +389,8 @@ Create an instance: `local game = client:Game(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | ``$ARRAY`` |  |
-| `status` | ``$STRING`` |  |
+| `data` | `table` |  |
+| `status` | `string` |  |
 
 #### Example: List
 
@@ -391,13 +413,13 @@ Create an instance: `local logo = client:Logo(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `logo_url` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `logo_url` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local logo, err = client:Logo():load({ id = "logo_id" })
+local logo, err = client:Logo():load()
 ```
 
 
@@ -416,33 +438,37 @@ Create an instance: `local tool = client:Tool(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `audio_url` | ``$STRING`` |  |
-| `original_url` | ``$STRING`` |  |
-| `short_url` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `audio_url` | `string` |  |
+| `original_url` | `string` |  |
+| `short_url` | `string` |  |
+| `status` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local tool, err = client:Tool():load({ id = "tool_id" })
+local tool, err = client:Tool():load()
 ```
 
 #### Example: Create
 
 ```lua
 local tool, err = client:Tool():create({
-  url = nil, -- `$STRING`
+  url = nil, -- string
 })
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -459,8 +485,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -509,9 +536,9 @@ stores the returned data and match criteria internally.
 
 ```lua
 local anime = client:Anime()
-anime:load({ id = "example_id" })
+anime:load()
 
--- anime:data_get() now returns the loaded anime data
+-- anime:data_get() now returns the anime data from the last load
 -- anime:match_get() returns the last match criteria
 ```
 

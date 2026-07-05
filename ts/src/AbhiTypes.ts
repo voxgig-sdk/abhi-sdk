@@ -10,35 +10,50 @@ export interface Anime {
   status?: string
 }
 
-export type AnimeLoadMatch = Partial<Anime>
+export interface AnimeLoadMatch {
+  data?: Record<string, any>
+  status?: string
+}
 
 export interface Download {
   download_url?: string
   status?: string
 }
 
-export type DownloadLoadMatch = Partial<Download>
+export interface DownloadLoadMatch {
+  download_url?: string
+  status?: string
+}
 
 export interface Fun {
   fact?: string
   status?: string
 }
 
-export type FunLoadMatch = Partial<Fun>
+export interface FunLoadMatch {
+  fact?: string
+  status?: string
+}
 
 export interface Game {
   data?: any[]
   status?: string
 }
 
-export type GameListMatch = Partial<Game>
+export interface GameListMatch {
+  data?: any[]
+  status?: string
+}
 
 export interface Logo {
   logo_url?: string
   status?: string
 }
 
-export type LogoLoadMatch = Partial<Logo>
+export interface LogoLoadMatch {
+  logo_url?: string
+  status?: string
+}
 
 export interface Tool {
   audio_url?: string
@@ -48,7 +63,19 @@ export interface Tool {
   url: string
 }
 
-export type ToolLoadMatch = Partial<Tool>
+export interface ToolLoadMatch {
+  audio_url?: string
+  original_url?: string
+  short_url?: string
+  status?: string
+  url?: string
+}
 
-export type ToolCreateData = Partial<Tool>
+export interface ToolCreateData {
+  audio_url?: string
+  original_url?: string
+  short_url?: string
+  status?: string
+  url: string
+}
 
