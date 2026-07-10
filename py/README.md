@@ -468,7 +468,7 @@ tool = client.Tool().load()
 
 ```python
 tool = client.Tool().create({
-    "url": "example",  # str
+    "url": "example_url",  # str
 })
 ```
 

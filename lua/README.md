@@ -454,7 +454,7 @@ local tool, err = client:Tool():load()
 
 ```lua
 local tool, err = client:Tool():create({
-  url = nil, -- string
+  url = "example_url", -- string
 })
 ```
 

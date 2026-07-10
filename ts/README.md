@@ -514,7 +514,7 @@ const tool = await client.Tool().load()
 
 ```ts
 const tool = await client.Tool().create({
-  url: /* string */,
+  url: 'example_url',
 })
 ```
 

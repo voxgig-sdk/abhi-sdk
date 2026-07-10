@@ -15,9 +15,9 @@ main: {
           url: "https://abhi-api.vercel.app"
         }
       ]
+      summary: "Abhi API offers a variety of free APIs for different purposes including anime data, downloads, fun facts, games, logo generation, and tools for tasks like shortening URLs and text-to-speech functionalities."
       title: "Abhi API"
       version: "1.0.0"
+      website: "https://abhi-api.vercel.app"
     }
   }
-}
-

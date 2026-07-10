@@ -111,6 +111,7 @@ same parameters as `Direct()`.
 
 ```go
 anime := client.Anime(nil)
+fmt.Println(anime.GetName()) // "anime"
 ```
 
 ### Fields
@@ -128,6 +129,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Anime(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -158,6 +163,7 @@ Return the entity name.
 
 ```go
 download := client.Download(nil)
+fmt.Println(download.GetName()) // "download"
 ```
 
 ### Fields
@@ -175,6 +181,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Download(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -205,6 +215,7 @@ Return the entity name.
 
 ```go
 fun := client.Fun(nil)
+fmt.Println(fun.GetName()) // "fun"
 ```
 
 ### Fields
@@ -222,6 +233,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Fun(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -252,6 +267,7 @@ Return the entity name.
 
 ```go
 game := client.Game(nil)
+fmt.Println(game.GetName()) // "game"
 ```
 
 ### Fields
@@ -269,6 +285,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Game(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -299,6 +319,7 @@ Return the entity name.
 
 ```go
 logo := client.Logo(nil)
+fmt.Println(logo.GetName()) // "logo"
 ```
 
 ### Fields
@@ -316,6 +337,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Logo(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -346,6 +371,7 @@ Return the entity name.
 
 ```go
 tool := client.Tool(nil)
+fmt.Println(tool.GetName()) // "tool"
 ```
 
 ### Fields
@@ -360,22 +386,30 @@ tool := client.Tool(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Tool(nil).Create(map[string]any{
-    "url": /* string */,
-}, nil)
-```
-
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
 Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Tool(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.Tool(nil).Create(map[string]any{
+    "url": "example_url",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

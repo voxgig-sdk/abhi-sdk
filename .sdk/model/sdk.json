@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -696,14 +693,17 @@
           "url": "https://abhi-api.vercel.app"
         },
         "description": "Abhi API offers a variety of free APIs for different purposes including anime data, downloads, fun facts, games, logo generation, and tools for tasks like shortening URLs and text-to-speech functionalities. It provides user-friendly endpoints for developers to integrate into their applications or projects.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "https://abhi-api.vercel.app"
           }
         ],
+        "summary": "Abhi API offers a variety of free APIs for different purposes including anime data, downloads, fun facts, games, logo generation, and tools for tasks like shortening URLs and text-to-speech functionalities.",
         "title": "Abhi API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://abhi-api.vercel.app"
       },
       "option": {},
       "target": {
@@ -756,6 +756,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -806,6 +809,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

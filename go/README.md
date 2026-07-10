@@ -484,8 +484,8 @@ Create an instance: `tool := client.Tool(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -511,8 +511,12 @@ fmt.Println(tool) // the loaded record
 
 ```go
 result, err := client.Tool(nil).Create(map[string]any{
-    "url": /* string */,
+    "url": "example_url",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

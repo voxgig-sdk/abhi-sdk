@@ -468,7 +468,7 @@ tool = client.Tool.load()
 
 ```ruby
 tool = client.Tool.create({
-  "url" => "example", # String
+  "url" => "example_url", # String
 })
 ```
 
