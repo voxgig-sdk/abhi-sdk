@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Abhi SDK exists test
 
 local sdk = require("abhi_sdk")
 
